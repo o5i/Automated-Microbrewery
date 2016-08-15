@@ -21,37 +21,34 @@
   check matematics int/double = int
 */
 
-
+// User Input
 // Start
 bool  SetStartStop = 0;
-
-// Timers
-elapsedMillis timeElapsed;
-
 // Mode
 bool  SetModeAutoMan = 0;
-
 // Manual Settings
 bool  SetManPump = 0, SetManRuehrwerk = 0, SetManFire1ONOFF = 0, SetManFire2ONOFF = 0, SetManModeTmpPwr1 = 0, SetManModeTmpPwr2 = 0;
 double  SetManTmp1 = 0, SetManTmp2 = 0;
 int SetManPwr1 = 0, SetManPwr2 = 0;
-
 // Automatic
 int SetAutoNumofCycle = 0, SetAutoCycle = 0;
 double SetAutoTemp1[20], SetAutoTime1[20], SetAutoTemp2[20], SetAutoTime2[20], SetAutoFire1ONOFF[20], SetAutoFire2ONOFF[20];
 bool  SetAutoPump[20], SerAutoRuehrwerk[20], AutoReadytoStart = 0, SetAutoStart = 0;
 
+// Variable
 // PID
 double Setpointfire1, Inputfire1, Outputfire1, Setpointfire2, Inputfire2, Outputfire2;
 
+// Controler Input
 // INPUTS
 double TempFire1, TempFire2, TempFire3;
 byte TempSensAddr[Numofsensors][8];
 
-//Modbus
+// Modbus Communication
 unsigned int  holdingRegs[HOLDING_REGS_SIZE];
 
 // Libs
+elapsedMillis timeElapsed;
 OneWire TempSens(10);
 PID Fire1pid(&Inputfire1, &Outputfire1, &Setpointfire1, 2, 5, 1, DIRECT);
 PID Fire2pid(&Inputfire2, &Outputfire2, &Setpointfire2, 2, 5, 1, DIRECT);
