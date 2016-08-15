@@ -1,7 +1,7 @@
-#include <OneWire.h>
-#include <PID_v1.h>
-#include <SimpleModbusSlave.h>
-#include <elapsedMillis.h>
+#include <OneWire.h>              //http://playground.arduino.cc/Learning/OneWire
+#include <PID_v1.h>               //http://playground.arduino.cc/Code/PIDLibrary
+#include <SimpleModbusSlave.h>    //http://forum.arduino.cc/index.php?topic=176142.new#new https://drive.google.com/folderview?id=0B0B286tJkafVSENVcU1RQVBfSzg&usp=drive_web'
+#include <elapsedMillis.h>        //http://playground.arduino.cc/Code/ElapsedMillis
 
 #define Pump 11
 #define Ruehrwerk 12
