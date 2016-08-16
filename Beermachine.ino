@@ -14,6 +14,7 @@
 #define serial_com Serial1
 #define serial_baud 57600
 /* todo
+  add start stop option on every cycle
   check timers if out of range
   Modbus
   Read Temp
@@ -33,7 +34,7 @@ int SetManPwr1 = 0, SetManPwr2 = 0;
 // Automatic
 int SetAutoNumofCycle = 0, SetAutoCycle = 0;
 double SetAutoTemp1[20], SetAutoTime1[20], SetAutoTemp2[20], SetAutoTime2[20], SetAutoFire1ONOFF[20], SetAutoFire2ONOFF[20];
-bool  SetAutoPump[20], SerAutoRuehrwerk[20], AutoReadytoStart = 0, SetAutoStart = 0;
+bool  SetAutoPump[20], SetAutoRuehrwerk[20], SetAutoConfirmtoproceed[20], AutoReadytoproceed = 0, SetAutoproceed = 0;
 
 // Variable
 // PID
@@ -112,18 +113,30 @@ void loop() {
           fire2heating = 0;
         }
         if (!((fire1heating) || (fire2heating))) {
-          AutoReadytoStart = 1;
-          if (SetAutoStart) {
+          AutoReadytoproceed = 1;
+          if (SetAutoproceed) {
             // Start Cycle 1
             SetAutoCycle++;
             timeElapsed = 0;
+            AutoReadytoproceed = 0;
+            SetAutoproceed = 0;
           }
         }
       }
       // Check Time
       if (timeElapsed > SetAutoTime1[SetAutoCycle]*60000) {
+        if (SetAutoConfirmtoproceed[SetAutoCycle]) {
+          AutoReadytoproceed = 1;
+          if (SetAutoproceed) {
+            SetAutoCycle++;
+            timeElapsed = 0;
+            AutoReadytoproceed = 0;
+            SetAutoproceed = 0;
+          }
+        } else {
         SetAutoCycle++;
         timeElapsed = 0;
+        }
       }
       // Pumpe
       pump_onoff(SetAutoPump[SetAutoCycle]);
@@ -245,8 +258,8 @@ void modbus_read_write() {
   // Automatic
   SetAutoNumofCycle = holdingRegs[30];
   SetAutoCycle = holdingRegs[31];
-  SetAutoStart = holdingRegs[32];
-  for (int i = 0; i < 20; i++) {
+  SetAutoproceed = holdingRegs[32];
+   for (int i = 0; i < 20; i++) {
     int offset_;
     offset_ = 40;
     SetAutoTemp1[i] = holdingRegs[i + offset_];
@@ -259,7 +272,9 @@ void modbus_read_write() {
     offset_ = 120;
     SetAutoPump[i] = holdingRegs[i + offset_];
     offset_ = 140;
-    SerAutoRuehrwerk[i] = holdingRegs[i + offset_];
+    SetAutoRuehrwerk[i] = holdingRegs[i + offset_];
+    offset_ = 160;
+    SetAutoConfirmtoproceed[i] =  holdingRegs[i + offset_];
   }
   // Read Inputs from Controller
   holdingRegs[1000] = TempFire1;
@@ -271,7 +286,7 @@ void modbus_read_write() {
   holdingRegs[1013] = !digitalRead(Ruehrwerk);
 
   // Read Variable from Controller
-  holdingRegs[1040] = AutoReadytoStart;
+  holdingRegs[1040] = AutoReadytoproceed;
   holdingRegs[1041] = Outputfire1;  // PID
   holdingRegs[1042] = Outputfire2;  // PID
 }
