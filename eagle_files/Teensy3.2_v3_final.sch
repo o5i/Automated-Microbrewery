@@ -7812,9 +7812,9 @@ Wenn Sie das ULP zur Brückenverwaltung verwenden, geschieht das automatisch.&lt
 <junction x="129.54" y="81.28"/>
 <wire x1="129.54" y1="81.28" x2="137.16" y2="81.28" width="0.1524" layer="91"/>
 <pinref part="JP14" gate="A" pin="7"/>
-<wire x1="208.28" y1="81.28" x2="137.16" y2="81.28" width="0.1524" layer="91"/>
-<wire x1="167.64" y1="210.82" x2="208.28" y2="210.82" width="0.1524" layer="91"/>
-<wire x1="208.28" y1="210.82" x2="208.28" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="81.28" x2="137.16" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="167.64" y1="210.82" x2="175.26" y2="210.82" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="210.82" x2="175.26" y2="81.28" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="5V_0,5A" class="0">
@@ -8824,20 +8824,6 @@ Wenn Sie das ULP zur Brückenverwaltung verwenden, geschieht das automatisch.&lt
 </net>
 <net name="N$33" class="0">
 <segment>
-<pinref part="OK2" gate="A" pin="A"/>
-<pinref part="OK1" gate="A" pin="A"/>
-<wire x1="289.56" y1="365.76" x2="287.02" y2="365.76" width="0.1524" layer="91"/>
-<wire x1="287.02" y1="365.76" x2="287.02" y2="345.44" width="0.1524" layer="91"/>
-<wire x1="287.02" y1="345.44" x2="289.56" y2="345.44" width="0.1524" layer="91"/>
-<junction x="287.02" y="345.44"/>
-<pinref part="OK3" gate="A" pin="A"/>
-<wire x1="289.56" y1="325.12" x2="287.02" y2="325.12" width="0.1524" layer="91"/>
-<wire x1="287.02" y1="325.12" x2="287.02" y2="345.44" width="0.1524" layer="91"/>
-<junction x="287.02" y="325.12"/>
-<pinref part="OK4" gate="A" pin="A"/>
-<wire x1="289.56" y1="304.8" x2="287.02" y2="304.8" width="0.1524" layer="91"/>
-<wire x1="287.02" y1="304.8" x2="287.02" y2="325.12" width="0.1524" layer="91"/>
-<wire x1="287.02" y1="365.76" x2="50.8" y2="365.76" width="0.1524" layer="91"/>
 <wire x1="58.42" y1="287.02" x2="50.8" y2="287.02" width="0.1524" layer="91"/>
 <wire x1="50.8" y1="287.02" x2="50.8" y2="289.56" width="0.1524" layer="91"/>
 <wire x1="58.42" y1="289.56" x2="50.8" y2="289.56" width="0.1524" layer="91"/>
@@ -8915,8 +8901,22 @@ Wenn Sie das ULP zur Brückenverwaltung verwenden, geschieht das automatisch.&lt
 <pinref part="JP15" gate="A" pin="3"/>
 <pinref part="JP15" gate="A" pin="4"/>
 <pinref part="JP15" gate="A" pin="5"/>
-<wire x1="50.8" y1="365.76" x2="50.8" y2="330.2" width="0.1524" layer="91"/>
-<junction x="50.8" y="330.2"/>
+<wire x1="58.42" y1="330.2" x2="63.5" y2="330.2" width="0.1524" layer="91"/>
+<pinref part="OK2" gate="A" pin="A"/>
+<pinref part="OK1" gate="A" pin="A"/>
+<wire x1="289.56" y1="365.76" x2="287.02" y2="365.76" width="0.1524" layer="91"/>
+<wire x1="287.02" y1="365.76" x2="287.02" y2="345.44" width="0.1524" layer="91"/>
+<wire x1="287.02" y1="345.44" x2="289.56" y2="345.44" width="0.1524" layer="91"/>
+<junction x="287.02" y="345.44"/>
+<pinref part="OK3" gate="A" pin="A"/>
+<wire x1="289.56" y1="325.12" x2="287.02" y2="325.12" width="0.1524" layer="91"/>
+<wire x1="287.02" y1="325.12" x2="287.02" y2="345.44" width="0.1524" layer="91"/>
+<junction x="287.02" y="325.12"/>
+<pinref part="OK4" gate="A" pin="A"/>
+<wire x1="289.56" y1="304.8" x2="287.02" y2="304.8" width="0.1524" layer="91"/>
+<wire x1="287.02" y1="304.8" x2="287.02" y2="325.12" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="330.2" x2="63.5" y2="365.76" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="365.76" x2="287.02" y2="365.76" width="0.1524" layer="91"/>
 <junction x="287.02" y="365.76"/>
 </segment>
 </net>
