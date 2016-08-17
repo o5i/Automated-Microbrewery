@@ -20,6 +20,9 @@
   Read Temp
   Check conversion int double temp
   check matematics int/double = int
+  Unify Fire algorythm
+  Add fire hysteresis to fire algorythm
+  
 */
 
 // User Input
@@ -36,9 +39,10 @@ int SetAutoNumofCycle = 0, SetAutoCycle = 0;
 double SetAutoTemp1[20], SetAutoTime1[20], SetAutoTemp2[20], SetAutoTime2[20], SetAutoFire1ONOFF[20], SetAutoFire2ONOFF[20];
 bool  SetAutoPump[20], SetAutoRuehrwerk[20], SetAutoConfirmtoproceed[20], AutoReadytoproceed = 0, SetAutoproceed = 0;
 
-// Variable
+// Fire Control
 // PID
 double Setpointfire1, Inputfire1, Outputfire1, Setpointfire2, Inputfire2, Outputfire2;
+int SetFireOnOffHysteresis = 2;
 
 // Controler Input
 // INPUTS
@@ -94,11 +98,17 @@ void loop() {
             Setpointfire1 = SetAutoTemp1[SetAutoCycle + 1];
             Fire1pid.Compute();
             fire1_onoff_pwr(1, Outputfire1);
-            fire2heating = 1;
+            fire1heating = 1;
+          } else if ((TempFire1 >= SetAutoTemp1[SetAutoCycle + 1])&&(TempFire1+SetFireOnOffHysteresis <= SetAutoTemp1[SetAutoCycle + 1])) {
+            fire1_onoff_pwr(1, 0);
+            fire1heating = 0;
+          } else {
+            fire1_onoff_pwr(0, 0);
+            fire1heating = 0;
           }
         } else {
           fire1_onoff_pwr(0, 0);
-          fire2heating = 0;
+          fire1heating = 0;
         }
         if (SetAutoFire2ONOFF[SetAutoCycle + 1]) {
           if (TempFire2 <= SetAutoTemp2[SetAutoCycle + 1]) {
@@ -107,6 +117,12 @@ void loop() {
             Fire1pid.Compute();
             fire2_onoff_pwr(1, Outputfire2);
             fire2heating = 1;
+          } else if ((TempFire2 >= SetAutoTemp2[SetAutoCycle + 1])&&(TempFire2+SetFireOnOffHysteresis <= SetAutoTemp2[SetAutoCycle + 1])) {
+            fire2_onoff_pwr(1, 0);
+            fire2heating = 0;
+          } else {
+            fire2_onoff_pwr(0, 0);
+            fire2heating = 0;
           }
         } else {
           fire2_onoff_pwr(0, 0);
@@ -144,22 +160,33 @@ void loop() {
       ruerwerk_onoff(SetAutoRuehrwerk[SetAutoCycle]);
       // Brenner 1
       if (SetAutoFire1ONOFF[SetAutoCycle]) {
-        Inputfire1 = TempFire1;
-        Setpointfire1 = SetAutoTemp1[SetAutoCycle];
-        Fire1pid.Compute();
-        fire1_onoff_pwr(1, Outputfire1);
+        if (TempFire1 <= SetAutoTemp1[SetAutoCycle]) {
+          Inputfire1 = TempFire1;
+          Setpointfire1 = SetAutoTemp1[SetAutoCycle];
+          Fire1pid.Compute();
+          fire1_onoff_pwr(1, Outputfire1);
+        } else if ((TempFire1 >= SetAutoTemp1[SetAutoCycle])&&(TempFire1+SetFireOnOffHysteresis <= SetAutoTemp1[SetAutoCycle])) {
+          fire1_onoff_pwr(1, 0);
+        } else {
+          fire1_onoff_pwr(0, 0);
+        }
       } else {
-        fire1_onoff_pwr(0, 0);
-      }
-
+          fire1_onoff_pwr(0, 0);
+      } 
       if (SetAutoFire2ONOFF[SetAutoCycle]) {
-        Inputfire2 = TempFire2;                                         // Brenner 2
-        Setpointfire2 = SetAutoTemp2[SetAutoCycle];
-        Fire2pid.Compute();
-        fire2_onoff_pwr(1, Outputfire2);
+        if (TempFire2 <= SetAutoTemp2[SetAutoCycle]) {
+          Inputfire2 = TempFire2;
+          Setpointfire2 = SetAutoTemp2[SetAutoCycle];
+          Fire2pid.Compute();
+          fire2_onoff_pwr(1, Outputfire2);
+        } else if ((TempFire2 >= SetAutoTemp2[SetAutoCycle])&&(TempFire2+SetFireOnOffHysteresis <= SetAutoTemp2[SetAutoCycle])) {
+          fire2_onoff_pwr(1, 0);
+        } else {
+          fire2_onoff_pwr(0, 0);
+        }
       } else {
-        fire2_onoff_pwr(0, 0);
-      }
+          fire2_onoff_pwr(0, 0);
+      } 
     } else {                            // Man Mode
       if (SetManPump == 1) {            // Pump
         pump_onoff(1);
