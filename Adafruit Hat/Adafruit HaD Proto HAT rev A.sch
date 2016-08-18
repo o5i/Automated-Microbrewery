@@ -2796,66 +2796,6 @@ Siemens, Hewlett-Packard, Texas Instuments, Sharp, Motorola&lt;p&gt;
 </deviceset>
 </devicesets>
 </library>
-<library name="e-sicherungen">
-<description>&lt;b&gt;Sicherungen und Begrenzer für Elektropläne&lt;/b&gt;&lt;p&gt;
-&lt;author&gt;Autor librarian@cadsoft.de&lt;/author&gt;</description>
-<packages>
-<package name="LEITUNGSSCHUTZSCHALTER">
-<description>Dummy</description>
-<pad name="1" x="2.54" y="5.08" drill="0.2" diameter="0.6" shape="square"/>
-<pad name="2" x="2.54" y="-5.08" drill="0.2" diameter="0.6" shape="square"/>
-<text x="0" y="2.54" size="1.27" layer="25" font="vector">&gt;NAME</text>
-<text x="0" y="-2.54" size="1.27" layer="27" font="vector">&gt;VALUE</text>
-</package>
-</packages>
-<symbols>
-<symbol name="LEITUNGSSCHUTZSCHALTER">
-<wire x1="2.54" y1="1.524" x2="2.54" y2="2.54" width="0.1524" layer="94"/>
-<wire x1="0.4184" y1="1.0134" x2="-0.5512" y2="0.7246" width="0.1524" layer="94"/>
-<wire x1="0.7072" y1="0.0438" x2="0.4184" y2="1.0134" width="0.1524" layer="94"/>
-<wire x1="-0.2624" y1="-0.245" x2="-0.5512" y2="0.7246" width="0.1524" layer="94"/>
-<wire x1="1.6872" y1="0.3224" x2="0.7072" y2="0.0438" width="0.1524" layer="94"/>
-<wire x1="-0.2624" y1="-0.245" x2="-1.2422" y2="-0.5338" width="0.1524" layer="94"/>
-<wire x1="2.54" y1="-2.54" x2="1.326" y2="1.5292" width="0.254" layer="94"/>
-<wire x1="1.1433" y1="-1.1792" x2="1.9324" y2="-0.8666" width="0.1524" layer="94"/>
-<text x="-2.54" y="2.54" size="1.778" layer="95" rot="R180">&gt;PART</text>
-<text x="-2.54" y="0" size="1.778" layer="96" rot="R180">&gt;VALUE</text>
-<text x="-2.54" y="-7.62" size="1.778" layer="96" rot="R180">&gt;FUNKTION</text>
-<text x="-2.54" y="-2.54" size="1.778" layer="96" rot="R180">&gt;TYPE</text>
-<text x="-2.54" y="-5.08" size="1.778" layer="96" rot="R180">&gt;HERSTELLER</text>
-<pin name="1" x="2.54" y="5.08" visible="pad" length="short" direction="pas" rot="R270"/>
-<pin name="2" x="2.54" y="-5.08" visible="pad" length="short" direction="pas" rot="R90"/>
-<polygon width="0.1524" layer="94">
-<vertex x="0.3048" y="-1.4986"/>
-<vertex x="1.143" y="-0.9144"/>
-<vertex x="1.3208" y="-1.3716"/>
-</polygon>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="LEITUNGSSCHUTZSCHALTER" prefix="F" uservalue="yes">
-<description>Sicherung</description>
-<gates>
-<gate name="G$1" symbol="LEITUNGSSCHUTZSCHALTER" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="LEITUNGSSCHUTZSCHALTER">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="FUNKTION" value="" constant="no"/>
-<attribute name="HERSTELLER" value="" constant="no"/>
-<attribute name="TYPE" value="" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="1wire">
 <description>&lt;h1&gt;Dallas/Maxim 1-Wire/iButton devices&lt;/h1&gt;
 &lt;p&gt;Onewire is a simple, low-cost bus system working with hundreds of devices on an up to 300m long one-wire (plus GND) bus system. It is relative slow (~16kBaud) but electrically undemanding, too. The onewire is hotplug-capable, if the host software supports it. The bus can be controlled by a single &amp;mu;C port pin or by special host adapter chips, which are available for RS232, Parallel, I&lt;sup&gt;2&lt;/sup&gt;C, and USB to onewire conversion. They are available as ready-to-run host adapter devices, too.&lt;/p&gt;
@@ -6431,6 +6371,82 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="fuse">
+<description>&lt;b&gt;Fuses and Fuse Holders&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="KS9V">
+<description>&lt;b&gt;FUSE HOLDER&lt;/b&gt;&lt;p&gt;
+CS Schukat</description>
+<wire x1="-1.8331" y1="-4.3286" x2="1.8331" y2="-4.3286" width="0.1524" layer="51" curve="45.903921"/>
+<wire x1="-1.6181" y1="-4.8154" x2="1.6181" y2="-4.8154" width="0.1524" layer="51" curve="37.147383"/>
+<wire x1="-1.42" y1="-5.08" x2="1.42" y2="-5.08" width="0.1524" layer="51"/>
+<wire x1="-1.2381" y1="-2.3622" x2="1.2381" y2="-2.3622" width="0.1524" layer="51" curve="55.320768"/>
+<wire x1="-1.2381" y1="2.3622" x2="1.2381" y2="2.3622" width="0.1524" layer="51" curve="-55.320768"/>
+<wire x1="-1.3394" y1="5.1647" x2="1.3394" y2="5.1647" width="0.1524" layer="51" curve="-29.077303"/>
+<wire x1="-2.556" y1="0.762" x2="2.556" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="-2.556" y1="-0.762" x2="2.556" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="-1.6181" y1="4.8154" x2="1.6181" y2="4.8154" width="0.1524" layer="51" curve="-37.147383"/>
+<wire x1="-1.8331" y1="4.3286" x2="1.8331" y2="4.3286" width="0.1524" layer="51" curve="-45.903921"/>
+<wire x1="-3.683" y1="-3.861" x2="-1.3394" y2="5.1642" width="0.1524" layer="21" curve="-121.809325"/>
+<wire x1="-1.6181" y1="4.8154" x2="-1.6181" y2="-4.8154" width="0.1524" layer="21" curve="142.852617"/>
+<wire x1="-1.8331" y1="4.3286" x2="-1.8331" y2="-4.3286" width="0.1524" layer="21" curve="134.096079"/>
+<wire x1="-1.2381" y1="2.3622" x2="-1.2381" y2="-2.3622" width="0.1524" layer="21" curve="124.679232"/>
+<wire x1="-3.683" y1="-4.826" x2="-3.683" y2="-3.861" width="0.1524" layer="21"/>
+<wire x1="-3.429" y1="-5.08" x2="-1.42" y2="-5.08" width="0.1524" layer="21"/>
+<wire x1="-3.683" y1="-4.826" x2="-3.429" y2="-5.08" width="0.1524" layer="21" curve="90"/>
+<wire x1="1.3394" y1="5.1642" x2="3.683" y2="-3.861" width="0.1524" layer="21" curve="-121.809325"/>
+<wire x1="1.2381" y1="-2.3622" x2="1.2381" y2="2.3622" width="0.1524" layer="21" curve="124.679232"/>
+<wire x1="1.8331" y1="-4.3286" x2="1.8331" y2="4.3286" width="0.1524" layer="21" curve="134.096079"/>
+<wire x1="1.6181" y1="-4.8154" x2="1.6181" y2="4.8154" width="0.1524" layer="21" curve="142.852617"/>
+<wire x1="3.683" y1="-4.826" x2="3.683" y2="-3.861" width="0.1524" layer="21"/>
+<wire x1="3.429" y1="-5.08" x2="3.683" y2="-4.826" width="0.1524" layer="21" curve="90"/>
+<wire x1="1.42" y1="-5.08" x2="3.429" y2="-5.08" width="0.1524" layer="21"/>
+<pad name="1" x="0" y="3.81" drill="1.3208" diameter="2.54" shape="long"/>
+<pad name="2" x="0" y="-3.81" drill="1.3208" diameter="2.54" shape="long"/>
+<text x="-2.54" y="5.588" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-3.429" y="-6.858" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+</package>
+</packages>
+<symbols>
+<symbol name="FUSE">
+<wire x1="-3.81" y1="-0.762" x2="3.81" y2="-0.762" width="0.254" layer="94"/>
+<wire x1="3.81" y1="0.762" x2="-3.81" y2="0.762" width="0.254" layer="94"/>
+<wire x1="3.81" y1="-0.762" x2="3.81" y2="0.762" width="0.254" layer="94"/>
+<wire x1="-3.81" y1="0.762" x2="-3.81" y2="-0.762" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="0" x2="2.54" y2="0" width="0.1524" layer="94"/>
+<text x="-3.81" y="1.397" size="1.778" layer="95">&gt;NAME</text>
+<text x="-3.81" y="-2.921" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
+<pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="KS9V" prefix="F" uservalue="yes">
+<description>&lt;b&gt;FUSE HOLDER&lt;/b&gt;&lt;p&gt;
+CS, Schukat</description>
+<gates>
+<gate name="G$1" symbol="FUSE" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="KS9V">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="MF" value="" constant="no"/>
+<attribute name="MPN" value="" constant="no"/>
+<attribute name="OC_FARNELL" value="unknown" constant="no"/>
+<attribute name="OC_NEWARK" value="unknown" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -6480,14 +6496,11 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <part name="X7" library="e-klemmen" deviceset="KLEMME_1-3" device=""/>
 <part name="X4" library="e-klemmen" deviceset="KLEMME_1-3" device=""/>
 <part name="X5" library="e-klemmen" deviceset="KLEMME_1-3" device=""/>
-<part name="F1" library="e-sicherungen" deviceset="LEITUNGSSCHUTZSCHALTER" device=""/>
-<part name="F2" library="e-sicherungen" deviceset="LEITUNGSSCHUTZSCHALTER" device=""/>
-<part name="F3" library="e-sicherungen" deviceset="LEITUNGSSCHUTZSCHALTER" device=""/>
-<part name="F4" library="e-sicherungen" deviceset="LEITUNGSSCHUTZSCHALTER" device=""/>
 <part name="IC2" library="1wire" deviceset="DS18B20" device=""/>
 <part name="IC3" library="1wire" deviceset="DS18B20" device=""/>
 <part name="IC4" library="1wire" deviceset="DS18B20" device=""/>
 <part name="R8" library="rcl" deviceset="R-EU_" device="0204/2V"/>
+<part name="F5" library="fuse" deviceset="KS9V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -6546,14 +6559,11 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <instance part="X5" gate="1" x="342.9" y="127" rot="R90"/>
 <instance part="X5" gate="2" x="342.9" y="129.54" rot="R90"/>
 <instance part="X5" gate="3" x="342.9" y="132.08" rot="R90"/>
-<instance part="F1" gate="G$1" x="284.48" y="91.44" rot="R90"/>
-<instance part="F2" gate="G$1" x="284.48" y="109.22" rot="R90"/>
-<instance part="F3" gate="G$1" x="284.48" y="127" rot="R90"/>
-<instance part="F4" gate="G$1" x="284.48" y="144.78" rot="R90"/>
 <instance part="IC2" gate="A" x="96.52" y="101.6"/>
 <instance part="IC3" gate="A" x="114.3" y="101.6"/>
 <instance part="IC4" gate="A" x="132.08" y="101.6"/>
 <instance part="R8" gate="G$1" x="96.52" y="116.84" rot="R90"/>
+<instance part="F5" gate="G$1" x="60.96" y="231.14" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -7182,21 +7192,20 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <wire x1="142.24" y1="223.52" x2="142.24" y2="220.98" width="0.1524" layer="91"/>
 <pinref part="G1" gate="G$1" pin="2"/>
 <wire x1="142.24" y1="220.98" x2="142.24" y2="218.44" width="0.1524" layer="91"/>
-<pinref part="X1" gate="1" pin="1.1"/>
-<wire x1="60.96" y1="223.52" x2="60.96" y2="238.76" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="223.52" x2="60.96" y2="226.06" width="0.1524" layer="91"/>
 <pinref part="X1" gate="2" pin="2.1"/>
 <wire x1="66.04" y1="220.98" x2="66.04" y2="238.76" width="0.1524" layer="91"/>
 <junction x="60.96" y="223.52"/>
 <junction x="66.04" y="220.98"/>
 <wire x1="142.24" y1="223.52" x2="271.78" y2="223.52" width="0.1524" layer="91"/>
 <wire x1="271.78" y1="223.52" x2="271.78" y2="147.32" width="0.1524" layer="91"/>
-<wire x1="271.78" y1="147.32" x2="279.4" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="271.78" y1="147.32" x2="307.34" y2="147.32" width="0.1524" layer="91"/>
 <wire x1="271.78" y1="147.32" x2="271.78" y2="129.54" width="0.1524" layer="91"/>
-<wire x1="271.78" y1="129.54" x2="279.4" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="271.78" y1="129.54" x2="307.34" y2="129.54" width="0.1524" layer="91"/>
 <wire x1="271.78" y1="129.54" x2="271.78" y2="111.76" width="0.1524" layer="91"/>
-<wire x1="271.78" y1="111.76" x2="279.4" y2="111.76" width="0.1524" layer="91"/>
+<wire x1="271.78" y1="111.76" x2="307.34" y2="111.76" width="0.1524" layer="91"/>
 <wire x1="271.78" y1="111.76" x2="271.78" y2="93.98" width="0.1524" layer="91"/>
-<wire x1="271.78" y1="93.98" x2="279.4" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="271.78" y1="93.98" x2="307.34" y2="93.98" width="0.1524" layer="91"/>
 <junction x="271.78" y="147.32"/>
 <junction x="271.78" y="129.54"/>
 <junction x="271.78" y="111.76"/>
@@ -7218,10 +7227,7 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <pinref part="X7" gate="3" pin="3.2"/>
 <pinref part="X4" gate="3" pin="3.2"/>
 <pinref part="X5" gate="3" pin="3.2"/>
-<pinref part="F1" gate="G$1" pin="1"/>
-<pinref part="F2" gate="G$1" pin="1"/>
-<pinref part="F3" gate="G$1" pin="1"/>
-<pinref part="F4" gate="G$1" pin="1"/>
+<pinref part="F5" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="N$32" class="0">
@@ -7494,32 +7500,24 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <segment>
 <pinref part="K1" gate="-1" pin="P"/>
 <wire x1="307.34" y1="147.32" x2="307.34" y2="149.86" width="0.1524" layer="91"/>
-<wire x1="289.56" y1="147.32" x2="307.34" y2="147.32" width="0.1524" layer="91"/>
-<pinref part="F4" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$84" class="0">
 <segment>
 <pinref part="K2" gate="-1" pin="P"/>
 <wire x1="307.34" y1="129.54" x2="307.34" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="289.56" y1="129.54" x2="307.34" y2="129.54" width="0.1524" layer="91"/>
-<pinref part="F3" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$85" class="0">
 <segment>
 <pinref part="K3" gate="-1" pin="P"/>
 <wire x1="307.34" y1="111.76" x2="307.34" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="289.56" y1="111.76" x2="307.34" y2="111.76" width="0.1524" layer="91"/>
-<pinref part="F2" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$86" class="0">
 <segment>
 <pinref part="K4" gate="-1" pin="P"/>
 <wire x1="307.34" y1="93.98" x2="307.34" y2="96.52" width="0.1524" layer="91"/>
-<wire x1="289.56" y1="93.98" x2="307.34" y2="93.98" width="0.1524" layer="91"/>
-<pinref part="F1" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$87" class="0">
@@ -7533,6 +7531,13 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <wire x1="132.08" y1="109.22" x2="132.08" y2="104.14" width="0.1524" layer="91"/>
 <junction x="96.52" y="109.22"/>
 <junction x="114.3" y="109.22"/>
+</segment>
+</net>
+<net name="N$88" class="0">
+<segment>
+<pinref part="X1" gate="1" pin="1.1"/>
+<wire x1="60.96" y1="236.22" x2="60.96" y2="238.76" width="0.1524" layer="91"/>
+<pinref part="F5" gate="G$1" pin="2"/>
 </segment>
 </net>
 </nets>
