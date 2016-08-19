@@ -8312,16 +8312,16 @@ einem neuen Namen ab.</description>
 <contactref element="G1" pad="1"/>
 <contactref element="G2" pad="2"/>
 <contactref element="G1" pad="2"/>
-<contactref element="X1" pad="2.1"/>
 <contactref element="X6" pad="3.2"/>
 <contactref element="X7" pad="3.2"/>
 <contactref element="X4" pad="3.2"/>
 <contactref element="X5" pad="3.2"/>
-<contactref element="S3" pad="12"/>
 <contactref element="X10" pad="3.2"/>
 <contactref element="X11" pad="3.2"/>
 <contactref element="X12" pad="3.2"/>
 <contactref element="X13" pad="3.2"/>
+<contactref element="S3" pad="12"/>
+<contactref element="X1" pad="2.1"/>
 <wire x1="-93.98" y1="-111.76" x2="-101.6" y2="-111.76" width="0" layer="19" extent="1-1"/>
 <wire x1="-86.36" y1="-111.76" x2="-93.98" y2="-111.76" width="0" layer="19" extent="1-1"/>
 <wire x1="-78.74" y1="-111.76" x2="-86.36" y2="-111.76" width="0" layer="19" extent="1-1"/>
