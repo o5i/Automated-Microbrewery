@@ -1,6 +1,6 @@
 /*
   Read Write Modbus registers test
-  dallastemperature.h and  causing delays
+  dallastemperature.h and causing delays
 */
 
 #include <PID_v1.h> //http://playground.arduino.cc/Code/PIDLibrary
@@ -26,13 +26,13 @@
 
 // ONEWIRE
 #define BUS_PIN 10
-#define TEMPERATURE_PRECISION 10
+#define TEMPERATURE_PRECISION 11
 OneWire ONEWIRE_BUS(BUS_PIN);
 DallasTemperature DS18B20(&ONEWIRE_BUS);
-DeviceAddress DS18B20_1, DS18B20_2, DS18B20_3;
+DeviceAddress DS18B20_0, DS18B20_1, DS18B20_2;
 
 // MODBUS
-#define MOD_REGS 2000
+#define MOD_REGS 600
 #define MOD_COM Serial1
 #define MOD_BAUD 57600
 unsigned int MOD_REG[MOD_REGS];
@@ -43,6 +43,8 @@ double PID_SET_2, PID_IN_2, PID_OUT_2;
 PID PID1(&PID_IN_1, &PID_OUT_1, &PID_SET_1, 2, 5, 1, DIRECT);
 PID PID2(&PID_IN_2, &PID_OUT_2, &PID_SET_2, 2, 5, 1, DIRECT);
 
+// Timers
+elapsedMillis TIME_BUZZER;
 elapsedMillis TIME_ELAPSED;
 elapsedMillis WHOLE_TIME_ELAPSED;
 
@@ -63,6 +65,7 @@ unsigned int TEMP_2;
 unsigned int TEMP_3;
 
 void setup() {
+  delay(10000);
   pinMode(OUT_PUMP, OUTPUT);
   pinMode(OUT_STIRRER, OUTPUT);
   pinMode(OUT_COOLER_CIRCULATION, OUTPUT);
@@ -79,23 +82,22 @@ void setup() {
 
   SER_COM.println("INITIALIZING SENSORS");
   DS18B20.begin();
-  //  while (DS18B20.getDeviceCount() < 3) {
-  //    digitalWrite(OUT_LED, !digitalRead(OUT_LED));
-  //    delay(1000);
-  //    BUZZER_ONOFF(1);
-  //    SER_COM.println("SENSOR ERROR");
-  //  }
+  DS18B20.getAddress(DS18B20_0, 0);
+  DS18B20.getAddress(DS18B20_1, 1);
+  DS18B20.getAddress(DS18B20_2, 2);
+  DS18B20.setResolution(DS18B20_0, TEMPERATURE_PRECISION);
   DS18B20.setResolution(DS18B20_1, TEMPERATURE_PRECISION);
   DS18B20.setResolution(DS18B20_2, TEMPERATURE_PRECISION);
-  DS18B20.setResolution(DS18B20_3, TEMPERATURE_PRECISION);
+  SER_COM.print("DEVICES:");
+  SER_COM.println(DS18B20.getDeviceCount(), DEC);
 
   SER_COM.println("INITIALIZING MODBUS");
   modbus_configure(&MOD_COM, MOD_BAUD, SERIAL_8N2, 1, 2, MOD_REGS, MOD_REG);
   modbus_update_comms(MOD_BAUD, SERIAL_8N2, 1);
 
   SER_COM.println("INITIALIZING PID CONTROLLERS");
-  PID1.SetOutputLimits(0, 1024);
-  PID2.SetOutputLimits(0, 1024);
+  PID1.SetOutputLimits(0, 1023);
+  PID2.SetOutputLimits(0, 1023);
 
   SER_COM.println("RESET VARIABLES");
   memset(MOD_REG, 0, sizeof(MOD_REG));
@@ -110,19 +112,23 @@ void setup() {
   GASV_2_D_ONOFF(0);
   analogWrite(OUT_GASV_1_A, 0);
   analogWrite(OUT_GASV_2_A, 0);
+  digitalWrite(OUT_LED, HIGH);
   BUZZER();
 }
 
 void loop() {
   if (Serial.available()) {
+    BUZZER();
     Serial.read();
     DEBUG();
   }
 
-  //  DS18B20.requestTemperatures();
-  //  TEMP_1 = DS18B20.getTempC(DS18B20_1) * 100;
-  //  TEMP_2 = DS18B20.getTempC(DS18B20_2) * 100;
-  //  TEMP_3 = DS18B20.getTempC(DS18B20_3) * 100;
+  // Onewire Temperature read
+  DS18B20.setWaitForConversion(false);
+  DS18B20.requestTemperatures();
+  TEMP_1 = DS18B20.getTempC(DS18B20_0) * 100;
+  TEMP_2 = DS18B20.getTempC(DS18B20_1) * 100;
+  TEMP_3 = DS18B20.getTempC(DS18B20_2) * 100;
 
   // Modbus
   modbus_update();
@@ -143,9 +149,11 @@ void loop() {
   }
 
   // Slave to Master
-  MOD_REG[300] = TEMP_1;
-  MOD_REG[301] = TEMP_2;
-  MOD_REG[301] = TEMP_3;
+  MOD_REG[500] = TEMP_1;
+  MOD_REG[501] = TEMP_2;
+  MOD_REG[502] = TEMP_3;
+  MOD_REG[503] = PID_OUT_1;
+  MOD_REG[504] = PID_OUT_2;
 
   ///////// MAN AUTO ////////////////
 
@@ -174,9 +182,6 @@ void loop() {
   ////////////// AUTO /////////////////
 
   if (MOD_REG[2]) {
-    if (DS18B20.getDeviceCount() < 3) {
-      MOD_REG[2] = 0;
-    }
     if (TIME_ELAPSED >= S_AUTO_SETTING[7][MOD_REG[3]] * 60000) {
       MOD_REG[3]++;
       TIME_ELAPSED = 0;
@@ -199,7 +204,7 @@ void loop() {
     } else {
       COOLER_ONOFF(0);
     }
-    if (S_AUTO_SETTING[3][MOD_REG[3]]) {
+    if ((S_AUTO_SETTING[3][MOD_REG[3]]) && (DS18B20.getDeviceCount() == 3)) {
       PID_IN_1 = TEMP_1;
       PID_SET_1 = S_AUTO_SETTING[5][MOD_REG[3]];
       PID1.Compute();
@@ -213,7 +218,7 @@ void loop() {
       GASV_1_D_ONOFF(0);
       analogWrite(OUT_GASV_1_A, 0);
     }
-    if (S_AUTO_SETTING[4][MOD_REG[3]]) {
+    if ((S_AUTO_SETTING[4][MOD_REG[3]]) && (DS18B20.getDeviceCount() == 3)) {
       PID_IN_2 = TEMP_2;
       PID_SET_2 = S_AUTO_SETTING[6][MOD_REG[3]];
       PID2.Compute();
@@ -253,7 +258,7 @@ void loop() {
       COOLER_ONOFF(0);
     }
     if (S_MAN_SETTING[2]) {
-      if (S_MAN_SETTING[6]) {
+      if ((S_MAN_SETTING[6]) && (DS18B20.getDeviceCount() == 3)) {
         PID_IN_1 = TEMP_1;
         PID_SET_1 = S_MAN_SETTING[8];
         PID1.Compute();
@@ -265,14 +270,14 @@ void loop() {
         }
       } else {
         GASV_1_D_ONOFF(1);
-        analogWrite(OUT_GASV_1_A, map(S_MAN_SETTING[4], 0, 100, 0, 1024));
+        analogWrite(OUT_GASV_1_A, map(S_MAN_SETTING[4], 0, 100, 0, 1023));
       }
     } else {
       GASV_1_D_ONOFF(0);
       analogWrite(OUT_GASV_1_A, 0);
     }
     if (S_MAN_SETTING[3]) {
-      if (S_MAN_SETTING[7]) {
+      if ((S_MAN_SETTING[7]) && (DS18B20.getDeviceCount() == 3)) {
         PID_IN_2 = TEMP_2;
         PID_SET_2 = S_MAN_SETTING[9];
         PID2.Compute();
@@ -284,7 +289,7 @@ void loop() {
         }
       } else {
         GASV_2_D_ONOFF(1);
-        analogWrite(OUT_GASV_2_A, map(S_MAN_SETTING[5], 0, 100, 0, 1024));
+        analogWrite(OUT_GASV_2_A, map(S_MAN_SETTING[5], 0, 100, 0, 1023));
       }
     } else {
       GASV_2_D_ONOFF(0);
@@ -336,7 +341,12 @@ void COOLER_ONOFF (bool onoff) {
 }
 
 void BUZZER() {
-  tone(OUT_BUZZER, 1900, 200);
+  if (TIME_BUZZER >= 300) {
+    TIME_BUZZER = 0;
+    noTone(OUT_BUZZER);
+  }
+  noTone(OUT_BUZZER);
+  tone(OUT_BUZZER, 300 + TIME_BUZZER, 100);
 }
 
 void DEBUG() {
@@ -344,6 +354,8 @@ void DEBUG() {
   SER_COM.print(WHOLE_TIME_ELAPSED / 1000);
   SER_COM.print(" TIMER:");
   SER_COM.print(TIME_ELAPSED / 1000);
+  SER_COM.print(" DEVICES:");
+  SER_COM.print(DS18B20.getDeviceCount(), DEC);
   SER_COM.print(" MODE:");
   if (MOD_REG[0]) {
     SER_COM.print("AUTO");
