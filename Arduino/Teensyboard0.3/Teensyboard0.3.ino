@@ -1,6 +1,6 @@
 /*
   Read Write Modbus registers test
-  dallastemperature.h and causing delays
+  gasventil über pid einaus?
 */
 
 #include <PID_v1.h> //http://playground.arduino.cc/Code/PIDLibrary
@@ -48,7 +48,7 @@ elapsedMillis TIME_BUZZER;
 elapsedMillis TIME_ELAPSED;
 elapsedMillis WHOLE_TIME_ELAPSED;
 
-// USER VARIABLE
+// USER SETTINGS
 // READ WRITE
 // MOD_REG[0] // AUTO_MAN
 // MOD_REG[1] // MAN_ON
@@ -58,14 +58,13 @@ elapsedMillis WHOLE_TIME_ELAPSED;
 const unsigned int S_TEMP_DIFF = 200; // Temperature Hysteresis between on off *100
 unsigned int S_AUTO_SETTING[8][20] = {0}; // 0=Autostart Cycle, 1=Pump, 2=Stirrer, 3=Gasv_1 onoff, 4=Gasv_2 onoff, 5=Target Temp_1, 6=Target Temp 2 , 7=Time Cycle), 8=Cooler circulation pump
 unsigned int S_MAN_SETTING[9] = {0}; // 0=Pump, 1=Stirrer, 2=Gasv_1 on off, 3=Gasv_2 on off, 4=Gasv_1 Manual Power 0-100, 5=Gasv_2 Manual Power 0-100, 6=Gasv_1 temp/pwr, 7=Gasv_2 temp/pwr, 8=Target Temp_1, 9=Target Temp 2), 10=Cooler circulation pump
-
 // SLAVE TO MASTER
 unsigned int TEMP_1;
 unsigned int TEMP_2;
 unsigned int TEMP_3;
 
 void setup() {
-  delay(10000);
+  delay(5000);
   pinMode(OUT_PUMP, OUTPUT);
   pinMode(OUT_STIRRER, OUTPUT);
   pinMode(OUT_COOLER_CIRCULATION, OUTPUT);
@@ -98,6 +97,8 @@ void setup() {
   SER_COM.println("INITIALIZING PID CONTROLLERS");
   PID1.SetOutputLimits(0, 1023);
   PID2.SetOutputLimits(0, 1023);
+  PID1.SetMode(AUTOMATIC);
+  PID2.SetMode(AUTOMATIC);
 
   SER_COM.println("RESET VARIABLES");
   memset(MOD_REG, 0, sizeof(MOD_REG));
