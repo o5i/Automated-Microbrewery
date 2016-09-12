@@ -32,7 +32,7 @@ void setup() {
   DS18B20.setResolution(DS18B20_2, TEMPERATURE_PRECISION);
 
   modbus_configure(&MOD_COM, MOD_BAUD, COM_MODE, 1, 2, MOD_REGS, MOD_REG);
-  modbus_update_comms(MOD_BAUD, SERIAL_8N2, 1);
+  modbus_update_comms(MOD_BAUD, COM_MODE, 1);
 }
 
 void loop() {
