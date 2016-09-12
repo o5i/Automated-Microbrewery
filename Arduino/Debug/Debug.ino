@@ -1,7 +1,7 @@
 /*
   Read Write Modbus registers test
   gasventil über pid einaus?
-bitshift int to double
+  modbus change "modbus_construct" http://flprog.ru/_fr/6/SimpleModbusMas.pdf
 */
 
 #include <SimpleModbusSlave.h> //http://forum.arduino.cc/index.php?topic=176142.new#new https://drive.google.com/folderview?id=0B0B286tJkafVSENVcU1RQVBfSzg&usp=drive_web'
@@ -37,7 +37,6 @@ void setup() {
 
 void loop() {
   modbus_update();
-
   DS18B20.setWaitForConversion(false);
   DS18B20.requestTemperatures();
   MOD_REG[0] = DS18B20.getTempC(DS18B20_0);
