@@ -35,7 +35,7 @@ DeviceAddress DS18B20_0, DS18B20_1, DS18B20_2;
 // MODBUS
 #define MOD_REGS 600
 #define MOD_COM Serial1
-#define MOD_BAUD 57600
+#define MOD_BAUD 9600
 unsigned int MOD_REG[MOD_REGS];
 
 // PID
