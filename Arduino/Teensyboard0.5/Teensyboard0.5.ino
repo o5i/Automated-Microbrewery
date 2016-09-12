@@ -1,7 +1,7 @@
 /*
   Read Write Modbus registers test
   gasventil über pid einaus?
-bitshift int to double
+  modbus change "modbus_construct" http://flprog.ru/_fr/6/SimpleModbusMas.pdf
 */
 
 #include <PID_v1.h> //http://playground.arduino.cc/Code/PIDLibrary
