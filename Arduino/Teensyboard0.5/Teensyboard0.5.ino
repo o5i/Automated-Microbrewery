@@ -33,9 +33,10 @@ DallasTemperature DS18B20(&ONEWIRE_BUS);
 DeviceAddress DS18B20_0, DS18B20_1, DS18B20_2;
 
 // MODBUS
-#define MOD_REGS 600
+#define MOD_REGS 220
 #define MOD_COM Serial1
-#define MOD_BAUD 9600
+#define MOD_BAUD 115200
+#define MOD_SER_MOD SERIAL_8N1
 unsigned int MOD_REG[MOD_REGS];
 
 // PID
@@ -92,8 +93,8 @@ void setup() {
   SER_COM.println(DS18B20.getDeviceCount(), DEC);
 
   SER_COM.println("INITIALIZING MODBUS");
-  modbus_configure(&MOD_COM, MOD_BAUD, SERIAL_8N2, 1, 2, MOD_REGS, MOD_REG);
-  modbus_update_comms(MOD_BAUD, SERIAL_8N2, 1);
+  modbus_configure(&MOD_COM, MOD_BAUD, MOD_SER_MOD, 1, 2, MOD_REGS, MOD_REG);
+  modbus_update_comms(MOD_BAUD, MOD_SER_MOD, 1);
 
   SER_COM.println("INITIALIZING PID CONTROLLERS");
   PID1.SetOutputLimits(0, 1023);
@@ -138,24 +139,24 @@ void loop() {
   // Master to Slave
   for (int i = 0; i < 10; i++) {
     int offset_;
-    offset_ = 100;
+    offset_ = 20;
     S_MAN_SETTING[i] = MOD_REG[offset_ + i];
   }
 
   for (int i = 0; i < 8; i++) {
     int offset_;
-    offset_ = 200;
+    offset_ = 40;
     for (int j = 0; j < 20; j++) {
       S_AUTO_SETTING[i][j] = MOD_REG[offset_ + i * j];
     }
   }
 
   // Slave to Master
-  MOD_REG[500] = TEMP_1;
-  MOD_REG[501] = TEMP_2;
-  MOD_REG[502] = TEMP_3;
-  MOD_REG[503] = PID_OUT_1;
-  MOD_REG[504] = PID_OUT_2;
+  MOD_REG[4] = TEMP_1;
+  MOD_REG[5] = TEMP_2;
+  MOD_REG[6] = TEMP_3;
+  MOD_REG[7] = PID_OUT_1;
+  MOD_REG[8] = PID_OUT_2;
 
   ///////// MAN AUTO ////////////////
 
