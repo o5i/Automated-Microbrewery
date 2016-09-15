@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 /*
   Read Write Modbus registers test
   gasventil über pid einaus?
