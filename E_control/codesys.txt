@@ -1,0 +1,36 @@
+Hi,
+
+Target Visu is not supported you could use 
+Chromium in kioks mode, this is then like fullscreen targetvisu:
+How to archive this?
+You need to install the following:
+
+1. Install chromium, x11-xserver-utils and unclutter
+
+sudo apt-get update && apt-get upgrade -y
+sudo apt-get install chromium x11-xserver-utils unclutter
+
+2. We need to prevent screen from going blank and disable screen saver.
+– edit /etc/xdg/lxsession/LXDE/autostart and comment # screen saver line and add those lines:
+
+@xset s off
+@xset -dpms
+@xset s noblank
+@chromium --kiosk --incognito http://localhost:8080/webvisu.htm
+
+another option would be to use a Pi2 and use the Empipany Browser which is installed on Raspian Wheezy.
+Pi 2 is needed because on the old Pi's (all others except Pi 2 ) this browser does not work with the plc webvisu.
+
+BR
+Edwin
+
+option --enable-viewport
+ --touch-enable Chromium
+
+"chromium-browser --kiosk http://127.0.0.1:8080/webvisu.htm
+
+
+http://forum.codesys.com/viewtopic.php?t=5872#p14826
+
+http://www.fleaplc.it/en/tutorials/33-arduino-as-raspberry-pi-s-remote-io-codesys
+
