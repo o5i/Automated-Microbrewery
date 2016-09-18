@@ -1,0 +1,374 @@
+.TH "MbusSerialSlaveProtocol" 3 "20 Oct 2006" "Modbus Slave C++ Library" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MbusSerialSlaveProtocol \- 
+.SH SYNOPSIS
+.br
+.PP
+Inherits \fBMbusSlaveServer\fP.
+.PP
+Inherited by \fBMbusAsciiSlaveProtocol\fP, and \fBMbusRtuSlaveProtocol\fP.
+.PP
+.SH "Detailed Description"
+.PP 
+This base class realises the Modbus\*{(R)\*}  serial slave protocols. 
+
+These methods apply to RTU and ASCII protocol flavours via inheritance. These classes provide functions to start-up and to execute the server engine which includes opening and closing of the serial port. Upon receipt of a valid master query the server engine calls Data Provider methods to exchange data with the user application. For a more detailed description which Modbus data and control functions have been implemented in the server engine see section \fBServer Functions common to all Protocol Flavours\fP.
+.PP
+It is possible to instantiate multiple instances for establishing multiple connections on different serial ports (They should be executed in separate threads).
+.PP
+\fBSee also:\fP
+.RS 4
+\fBServer Functions common to all Protocol Flavours\fP, \fBMbusSlaveServer\fP 
+.RE
+.PP
+
+.PP
+.SS "Serial Server Management Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual int \fBstartupServer\fP (const char *const portName, long baudRate, int dataBits, int stopBits, int parity)"
+.br
+.RI "\fIPuts the Modbus server into operation. \fP"
+.ti -1c
+.RI "int \fBstartupServer\fP (const char *const portName, long baudRate)"
+.br
+.RI "\fIPuts the Modbus RTU server into operation and opens the associated serial port with default port parameters. \fP"
+.ti -1c
+.RI "virtual int \fBstartupServer\fP (int slaveAddr, const char *const portName, long baudRate, int dataBits, int stopBits, int parity)"
+.br
+.RI "\fIPuts the Modbus server into operation using a single slave address and data table. \fP"
+.ti -1c
+.RI "int \fBstartupServer\fP (int slaveAddr, const char *const portName, long baudRate)"
+.br
+.RI "\fIPuts the Modbus RTU server into operation and opens the associated serial port with default port parameters. \fP"
+.ti -1c
+.RI "void \fBshutdownServer\fP ()"
+.br
+.RI "\fIShuts down the Modbus server. \fP"
+.ti -1c
+.RI "int \fBisStarted\fP ()"
+.br
+.RI "\fIReturns if server has been started up. \fP"
+.ti -1c
+.RI "int \fBgetConnectionStatus\fP ()"
+.br
+.RI "\fIChecks if a Modbus master is polling periodically. \fP"
+.ti -1c
+.RI "virtual int \fBenableRs485Mode\fP (int rtsDelay)"
+.br
+.RI "\fIEnables RS485 mode. \fP"
+.in -1c
+.SS "Server Management Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBaddDataTable\fP (int slaveAddr, \fBMbusDataTableInterface\fP *dataTablePtr)"
+.br
+.RI "\fIAssociates a protocol object with a Data Provider and a slave address. \fP"
+.ti -1c
+.RI "virtual int \fBserverLoop\fP ()=0"
+.br
+.RI "\fIModbus slave server loop. \fP"
+.in -1c
+.SS "Protocol Configuration"
+
+.in +1c
+.ti -1c
+.RI "long \fBsetTimeout\fP (long timeOut)"
+.br
+.RI "\fIConfigures master transmit time-out supervision. \fP"
+.ti -1c
+.RI "long \fBgetTimeout\fP ()"
+.br
+.RI "\fIReturns the master time-out supervision value. \fP"
+.in -1c
+.SS "Transmission Statistic Functions"
+
+.in +1c
+.ti -1c
+.RI "unsigned long \fBgetTotalCounter\fP ()"
+.br
+.RI "\fIReturns how often a message transfer has been executed. \fP"
+.ti -1c
+.RI "void \fBresetTotalCounter\fP ()"
+.br
+.RI "\fIResets total message transfer counter. \fP"
+.ti -1c
+.RI "unsigned long \fBgetSuccessCounter\fP ()"
+.br
+.RI "\fIReturns how often a message transfer was successful. \fP"
+.ti -1c
+.RI "void \fBresetSuccessCounter\fP ()"
+.br
+.RI "\fIResets successful message transfer counter. \fP"
+.in -1c
+.SS "Utility Functions"
+
+.in +1c
+.ti -1c
+.RI "static char * \fBgetPackageVersion\fP ()"
+.br
+.RI "\fIReturns the package version number. \fP"
+.in -1c
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBSER_DATABITS_7\fP =  SerialPort::SER_DATABITS_7, \fBSER_DATABITS_8\fP =  SerialPort::SER_DATABITS_8 }"
+.br
+.ti -1c
+.RI "enum { \fBSER_STOPBITS_1\fP =  SerialPort::SER_STOPBITS_1, \fBSER_STOPBITS_2\fP =  SerialPort::SER_STOPBITS_2 }"
+.br
+.ti -1c
+.RI "enum { \fBSER_PARITY_NONE\fP =  SerialPort::SER_PARITY_NONE, \fBSER_PARITY_EVEN\fP =  SerialPort::SER_PARITY_EVEN, \fBSER_PARITY_ODD\fP =  SerialPort::SER_PARITY_ODD }"
+.br
+.in -1c
+.SS "Protected Types"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBSER_RS232\fP, \fBSER_RS485\fP }"
+.br
+.in -1c
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "anonymous enum"
+.PP
+\fBEnumeration values: \fP
+.in +1c
+.TP
+\fB\fISER_DATABITS_7 \fP\fP
+7 data bits 
+.TP
+\fB\fISER_DATABITS_8 \fP\fP
+8 data bits 
+.SS "anonymous enum"
+.PP
+\fBEnumeration values: \fP
+.in +1c
+.TP
+\fB\fISER_STOPBITS_1 \fP\fP
+1 stop bit 
+.TP
+\fB\fISER_STOPBITS_2 \fP\fP
+2 stop bits 
+.SS "anonymous enum"
+.PP
+\fBEnumeration values: \fP
+.in +1c
+.TP
+\fB\fISER_PARITY_NONE \fP\fP
+No parity. 
+.TP
+\fB\fISER_PARITY_EVEN \fP\fP
+Even parity. 
+.TP
+\fB\fISER_PARITY_ODD \fP\fP
+Odd parity. 
+.SS "anonymous enum\fC [protected]\fP"
+.PP
+\fBEnumeration values: \fP
+.in +1c
+.TP
+\fB\fISER_RS232 \fP\fP
+RS232 mode w/o RTS/CTS handshake. 
+.TP
+\fB\fISER_RS485 \fP\fP
+RS485 mode: RTS enables/disables transmitter. 
+.SH "Member Function Documentation"
+.PP 
+.SS "int startupServer (const char *const  portName, long baudRate, int dataBits, int stopBits, int parity)\fC [virtual]\fP"
+.PP
+Puts the Modbus server into operation. 
+.PP
+This function opens the serial port. After the port has been opened queries from a Modbus master will be processed.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIportName\fP Serial port identifier (e.g. 'COM1', '/dev/ser1 or /dev/ttyS0') 
+.br
+\fIbaudRate\fP The port baudRate in bps (typically 1200 - 9600). 
+.br
+\fIdataBits\fP Must be SER_DATABITS_8 for RTU 
+.br
+\fIstopBits\fP SER_STOPBITS_1: 1 stop bit, SER_STOPBITS_2: 2 stop bits 
+.br
+\fIparity\fP SER_PARITY_NONE: no parity, SER_PARITY_ODD: odd parity, SER_PARITY_EVEN: even parity 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+FTALK_SUCCESS on success or error code. See \fBProtocol Errors and Exceptions\fP for a list of error codes. 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBMbusRtuSlaveProtocol\fP.
+.SS "int startupServer (const char *const  portName, long baudRate)"
+.PP
+Puts the Modbus RTU server into operation and opens the associated serial port with default port parameters. 
+.PP
+This function opens the serial port with 8 databits, 1 stopbit and even parity and initialises the server engine.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIportName\fP Serial port identifier (e.g. 'COM1', '/dev/ser1' or '/dev/ttyS0') 
+.br
+\fIbaudRate\fP The port baudRate in bps (typically 1200 - 9600). 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+FTALK_SUCCESS on success or error code. See \fBProtocol Errors and Exceptions\fP for a list of error codes. 
+.RE
+.PP
+
+.SS "int startupServer (int slaveAddr, const char *const  portName, long baudRate, int dataBits, int stopBits, int parity)\fC [virtual]\fP"
+.PP
+Puts the Modbus server into operation using a single slave address and data table. 
+.PP
+This function opens the serial port. After the port has been opened queries from a Modbus master will be processed.
+.PP
+Function is kept for compatibility with previous API versions, do not use for new implementations.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIslaveAddr\fP Modbus slave address for server to listen on (1-255) 
+.br
+\fIportName\fP Serial port identifier (e.g. 'COM1', '/dev/ser1 or /dev/ttyS0') 
+.br
+\fIbaudRate\fP The port baudRate in bps (typically 1200 - 9600). 
+.br
+\fIdataBits\fP Must be SER_DATABITS_8 for RTU 
+.br
+\fIstopBits\fP SER_STOPBITS_1: 1 stop bit, SER_STOPBITS_2: 2 stop bits 
+.br
+\fIparity\fP SER_PARITY_NONE: no parity, SER_PARITY_ODD: odd parity, SER_PARITY_EVEN: even parity 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+FTALK_SUCCESS on success or error code. See \fBProtocol Errors and Exceptions\fP for a list of error codes. 
+.RE
+.PP
+.PP
+\fBDeprecated\fP
+.RS 4
+This function is deprecated. The preferred way of assigning a slave address is using the default constructor and configuring data table and slave address using addDataTable method. 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBMbusRtuSlaveProtocol\fP.
+.SS "int startupServer (int slaveAddr, const char *const  portName, long baudRate)"
+.PP
+Puts the Modbus RTU server into operation and opens the associated serial port with default port parameters. 
+.PP
+This function opens the serial port with 8 databits, 1 stopbit and even parity and initialises the server engine.
+.PP
+Function is kept for compatibility with previous API versions, do not use for new implementations.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIslaveAddr\fP Modbus slave address for server to listen on (1-255) 
+.br
+\fIportName\fP Serial port identifier (e.g. 'COM1', '/dev/ser1' or '/dev/ttyS0') 
+.br
+\fIbaudRate\fP The port baudRate in bps (typically 1200 - 9600). 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+FTALK_SUCCESS on success or error code. See \fBProtocol Errors and Exceptions\fP for a list of error codes. 
+.RE
+.PP
+.PP
+\fBDeprecated\fP
+.RS 4
+This function is deprecated. The preferred way of assigning a slave address is using the default constructor and configuring data table and slave address using addDataTable method. 
+.RE
+.PP
+
+.SS "void shutdownServer ()\fC [virtual]\fP"
+.PP
+Shuts down the Modbus server. 
+.PP
+This function also closes the serial port. 
+.PP
+Reimplemented from \fBMbusSlaveServer\fP.
+.SS "int isStarted ()\fC [virtual]\fP"
+.PP
+Returns if server has been started up. 
+.PP
+\fBReturn values:\fP
+.RS 4
+\fItrue\fP = started 
+.br
+\fIfalse\fP = shutdown 
+.RE
+.PP
+
+.PP
+Implements \fBMbusSlaveServer\fP.
+.SS "int getConnectionStatus ()\fC [virtual]\fP"
+.PP
+Checks if a Modbus master is polling periodically. 
+.PP
+\fBReturn values:\fP
+.RS 4
+\fItrue\fP = A master is polling at a frequency higher than the master transmit time-out value 
+.br
+\fIfalse\fP = No master is polling within the time-out period 
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+The master transmit time-out value must be set > 0 in order for this function to work. 
+.RE
+.PP
+
+.PP
+Implements \fBMbusSlaveServer\fP.
+.SS "int enableRs485Mode (int rtsDelay)\fC [virtual]\fP"
+.PP
+Enables RS485 mode. 
+.PP
+In RS485 mode the RTS signal can be used to enable and disable the transmitter of a RS232/RS485 converter. The RTS signal is asserted before sending data. It is cleared after the transmit buffer has been emptied and in addition the specified delay time has elapsed. The delay time is necessary because even the transmit buffer is already empty, the UART's FIFO will still contain unsent characters.
+.PP
+\fBWarning:\fP
+.RS 4
+The use of RTS controlled RS232/RS485 converters should be avoided if possible. It is difficult to determine the exact time when to switch off the transmitter with non real-time operating systems like Windows and Linux. If it is switched off to early characters might still sit in the FIFO or the transmit register of the UART and these characters will be lost. Hence the slave will not recognize the message. On the other hand if it is switched off too late then the slave's message is corrupted and the master will not recognize the message.
+.RE
+.PP
+\fBRemarks:\fP
+.RS 4
+The delay value is indicative only and not guaranteed to be maintained. How precise it is followed depends on the operating system used, it's scheduling priority and it's system timer resolution. 
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+A protocol must be closed in order to configure it. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrtsDelay\fP Delay time in ms (Range: 0 - 100000) which applies after the transmit buffer is empty. 0 disables this mode. 
+.RE
+.PP
+\fBReturn values:\fP
+.RS 4
+\fIFTALK_SUCCESS\fP Success 
+.br
+\fIFTALK_ILLEGAL_ARGUMENT_ERROR\fP Argument out of range 
+.br
+\fIFTALK_ILLEGAL_STATE_ERROR\fP Protocol is already open 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Modbus Slave C++ Library from the source code.

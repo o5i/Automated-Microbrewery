@@ -1,0 +1,328 @@
+.TH "integrate" 3 "26 May 2004" "Modbus Protocol Library Documentation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+integrate \- How to integrate the Protocol in your Application
+.SH "Using Serial Protocols"
+.PP
+Let's assume we want to talk to a Modbus slave device with slave address 1.
+.PP
+The registers for reading are in the reference range 4:00100 to 4:00119 and the registers for writing are in the range 4:00200 to 4:00219. The discretes for reading are in the reference range 0:00010 to 0:00019 and the discretes for writing are in the range 0:00020 to 0:00029.
+.PP
+1. Include the package header files 
+.PP
+.nf
+#include 'MbusRtuMasterProtocol.hpp'
+
+.PP
+.PP
+2. Device data profile definition
+.PP
+Define the data sets which reflects the slave's data profile by type and size: 
+.PP
+.nf
+short readRegSet[20];
+short writeRegSet[20];
+int readBitSet[20];
+int writeBitSet[20];
+
+.PP
+.PP
+If you are using floats instead of 16-bit shorts define: 
+.PP
+.nf
+float readFloatSet[10];
+float writeFloatSet[10];
+
+.PP
+Note that because a float occupies two 16-bit registers the array size is half the size it would be for 16-bit shorts!
+.PP
+If you are using 32-bit ints instead of 16-bit shorts define: 
+.PP
+.nf
+long readLongSet[10];
+long writeLongSet[10];
+
+.PP
+Note that because a long occupies two 16-bit registers the array size is half the size it would be for 16-bit shorts!
+.PP
+3. Declare and instantiate a protocol object 
+.PP
+.nf
+MbusRtuMasterProtocol mbusProtocol;
+
+.PP
+.PP
+4. Open the protocol 
+.PP
+.nf
+   int result;
+
+   result = mbusProtocol.openProtocol(portName,
+                                      9600L, // Baudrate
+                                      8,     // Databits
+                                      1,     // Stopbits
+                                      0);    // Parity
+   if (result != FTALK_SUCCESS)
+   {
+      fprintf(stderr, 'Error opening protocol: %s!\n',
+                       getBusProtocolErrorText(result));
+      exit(EXIT_FAILURE);
+   }
+
+.PP
+.PP
+5. Perform the data transfer functions
+.IP "\(bu" 2
+To read register values: 
+.PP
+.nf
+mbusProtocol.readMultipleRegisters(1, 100, readRegSet, sizeof(readRegSet) / sizeof(short));
+
+.PP
+
+.IP "\(bu" 2
+To write a single register value: 
+.PP
+.nf
+mbusProtocol.writeSingleRegister(1, 200, 1234);
+
+.PP
+
+.IP "\(bu" 2
+To write mutliple register values: 
+.PP
+.nf
+mbusProtocol.writeMultipleRegisters(1, 200, writeRegSet, sizeof(writeRegSet) / sizeof(short));
+
+.PP
+
+.IP "\(bu" 2
+To read discrete values: 
+.PP
+.nf
+mbusProtocol.readCoils(1, 10, readBitSet, sizeof(readBitSet) / sizeof(int));
+
+.PP
+
+.IP "\(bu" 2
+To write a single discrete value: 
+.PP
+.nf
+mbusProtocol.writeCoil(1, 20, 1);
+
+.PP
+
+.IP "\(bu" 2
+To write multiple discrete values: 
+.PP
+.nf
+mbusProtocol.forceMultipleCoils(1, 20, sizeof(writeBitSet) / sizeof(int));
+
+.PP
+
+.IP "\(bu" 2
+To read float values: 
+.PP
+.nf
+mbusProtocol.readMultipleFloats(1, 100, readFloatSet, sizeof(readFloatSet) / sizeof(float));
+
+.PP
+
+.IP "\(bu" 2
+To read long integer values: 
+.PP
+.nf
+mbusProtocol.readMultipleLongInts(1, 100, readLongSet, sizeof(readLongSet) / sizeof(long));
+
+.PP
+
+.PP
+.PP
+6. Close the protocol port if not needed any more 
+.PP
+.nf
+mbusProtocol.closeProtocol();
+
+.PP
+.PP
+7. Error Handling
+.PP
+Serial protocol errors like slave device failures, transmission failures, checksum errors and time-outs return an error code. The following code snippet can handle and report these errors:
+.PP
+.PP
+.nf
+   int result;
+
+   result = mbusProtocol.readMultipleRegisters(1, 100, dataSetArray, 10);
+   if (result != FTALK_SUCCESS)
+   {
+      fprintf(stderr, '%s!\n', getBusProtocolErrorText(result));
+      // Stop for fatal errors
+      if (!(result & FTALK_BUS_PROTOCOL_ERROR_CLASS))
+         return;
+   }
+.PP
+.PP
+An automatic retry mechanism is available and can be enabled with mbusProtocol.setRetryCnt(3) before opening the protocol port.
+.SH "Using MODBUS/TCP Protocol"
+.PP
+Let's assume we want to talk to a Modbus slave device with unit address 1 and IP address 10.0.0.11.
+.PP
+The registers for reading are in the reference range 4:00100 to 4:00119 and the registers for writing are in the range 4:00200 to 4:00219. The discretes for reading are in the reference range 0:00010 to 0:00019 and the discretes for writing are in the range 0:00020 to 0:00029.
+.PP
+1. Include the package header files 
+.PP
+.nf
+#include 'MbusTcpMasterProtocol.hpp'
+
+.PP
+.PP
+2. Device data profile definition
+.PP
+Define the data sets which reflects the slave's data profile by type and size: 
+.PP
+.nf
+short readRegSet[20];
+short writeRegSet[20];
+int readBitSet[10];
+int writeBitSet[10];
+
+.PP
+.PP
+If you are using floats instead of 16-bit shorts define: 
+.PP
+.nf
+float readFloatSet[10];
+float writeFloatSet[10];
+
+.PP
+Note that because a float occupies two 16-bit registers the array size is half the size it would be for 16-bit shorts!
+.PP
+If you are using 32-bit ints instead of 16-bit shorts define: 
+.PP
+.nf
+long readLongSet[10];
+long writeLongSet[10];
+
+.PP
+Note that because a long occupies two 16-bit registers the array size is half the size it would be for 16-bit shorts!
+.PP
+3. Declare and instantiate a protocol object 
+.PP
+.nf
+MbusTcpMasterProtocol mbusProtocol;
+
+.PP
+.PP
+4. Open the protocol 
+.PP
+.nf
+mbusProtocol.openProtocol('10.0.0.11);
+
+.PP
+.PP
+5. Perform the data transfer functions
+.IP "\(bu" 2
+To read register values: 
+.PP
+.nf
+mbusProtocol.readMultipleRegisters(1, 100, readRegSet, sizeof(readRegSet) / sizeof(short));
+
+.PP
+
+.IP "\(bu" 2
+To write a single register value: 
+.PP
+.nf
+mbusProtocol.writeSingleRegister(1, 200, 1234);
+
+.PP
+
+.IP "\(bu" 2
+To write mutliple register values: 
+.PP
+.nf
+mbusProtocol.writeMultipleRegisters(1, 200, writeRegSet, sizeof(writeRegSet) / sizeof(short));
+
+.PP
+
+.IP "\(bu" 2
+To read discrete values: 
+.PP
+.nf
+mbusProtocol.readCoils(1, 10, readBitSet, sizeof(readBitSet) / sizeof(int));
+
+.PP
+
+.IP "\(bu" 2
+To write a single discrete value: 
+.PP
+.nf
+mbusProtocol.writeCoil(1, 20, 1);
+
+.PP
+
+.IP "\(bu" 2
+To write multiple discrete values: 
+.PP
+.nf
+mbusProtocol.forceMultipleCoils(1, 20, writeBitSet, sizeof(writeBitSet) / sizeof(int));
+
+.PP
+
+.IP "\(bu" 2
+To read float values: 
+.PP
+.nf
+mbusProtocol.readMultipleFloats(1, 100, readFloatSet, sizeof(readFloatSet) / sizeof(float));
+
+.PP
+
+.IP "\(bu" 2
+To read long integer values: 
+.PP
+.nf
+mbusProtocol.readMultipleLongInts(1, 100, readLongSet, sizeof(readLongSet) / sizeof(long));
+
+.PP
+
+.PP
+.PP
+6. Close the connection if not needed any more 
+.PP
+.nf
+mbusProtocol.closeProtocol();
+
+.PP
+.PP
+7. Error Handling
+.PP
+TCP/IP protocol errors like slave failures, TCP/IP connection failures and time-outs return an error code. The following code snippet can handle these errors:
+.PP
+.PP
+.nf
+   int result;
+
+   result = mbusProtocol.readMultipleRegisters(1, 100, dataSetArray, 10);
+   if (result != FTALK_SUCCESS)
+   {
+      fprintf(stderr, '%s!\n', getBusProtocolErrorText(result));
+      // Stop for fatal errors
+      if (!(result & FTALK_BUS_PROTOCOL_ERROR_CLASS))
+         return;
+   }
+}
+.PP
+.PP
+If the method returns FTALK_CONNECTION_WAS_CLOSED, it signals that the the TCP/IP connection was lost or closed by the remote end. Before using further data and control functions the connection has to be re-opened succesfully.
+.SH "Examples"
+.PP
+.IP "\(bu" 2
+\fBSerial Example\fP
+.IP "\(bu" 2
+\fBMODBUS/TCP Example\fP
+.IP "\(bu" 2
+\fBModpoll application\fP 
+.PP
+

@@ -1,0 +1,145 @@
+.TH "MbusDataTableInterface" 3 "20 Oct 2006" "Modbus Slave C++ Library" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MbusDataTableInterface \- 
+.SH SYNOPSIS
+.br
+.PP
+.SH "Detailed Description"
+.PP 
+This class defines the interface between a Modbus slave Server Engine and your application. Descendants of this class are referred to as Data Providers. 
+
+To create an application specific Data Provider derive a new class from MbusDataTableInterface and override the required data access methods.
+.PP
+\fBSee also:\fP
+.RS 4
+\fBMbusSlaveServer\fP 
+.PP
+\fBServer Functions common to all Protocol Flavours\fP 
+.RE
+.PP
+
+.PP
+.SS "Data Access Methods for Table 4:00000 (Holding Registers)"
+Data Access Methods to support read and write of output registers (holding registers) in table 4:00000.
+.PP
+This table is accessed by the following Modbus functions:
+.PP
+.IP "\(bu" 2
+Modbus function 16 (10 hex), Preset Multiple Registers/Write Multiple Registers
+.IP "\(bu" 2
+Modbus function 3 (03 hex), Read Holding Registers/Read Multiple Registers
+.IP "\(bu" 2
+Modbus function 6 (06 hex), Preset Single Register/Write Single Register.
+.IP "\(bu" 2
+Modbus function 22 (16 hex), Mask Write Register.
+.IP "\(bu" 2
+Modbus function 23 (17 hex), Read/Write Registers. 
+.PP
+
+.in +1c
+.ti -1c
+.RI "virtual int \fBreadHoldingRegistersTable\fP (int startRef, short regArr[], int refCnt)"
+.br
+.RI "\fIOverride this method to implement a Data Provider function to read Holding Registers. \fP"
+.ti -1c
+.RI "virtual int \fBwriteHoldingRegistersTable\fP (int startRef, const short regArr[], int refCnt)"
+.br
+.RI "\fIOverride this method to implement a Data Provider function to write Holding Registers. \fP"
+.in -1c
+.SS "Data Access Methods for Table 3:00000 (Input Registers)"
+Data Access Methods to support read of input registers in table 3:00000.
+.PP
+This table is accessed by the following Modbus functions:
+.PP
+.IP "\(bu" 2
+Modbus function 4 (04 hex), Read Input Registers.
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+Input registers cannot be written 
+.RE
+.PP
+
+.in +1c
+.ti -1c
+.RI "virtual int \fBreadInputRegistersTable\fP (int startRef, short regArr[], int refCnt)"
+.br
+.RI "\fIOverride this method to implement a Data Provider function to read Input Registers. \fP"
+.in -1c
+.SS "Data Access Methods for Table 0:00000 (Coils)"
+Data Access Methods to support read and write of discrete outputs (coils) in table 0:00000.
+.PP
+This table is accessed by the following Modbus functions:
+.PP
+.IP "\(bu" 2
+Modbus function 1 (01 hex), Read Coil Status/Read Coils.
+.IP "\(bu" 2
+Modbus function 5 (05 hex), Force Single Coil/Write Coil.
+.IP "\(bu" 2
+Modbus function 15 (0F hex), Force Multiple Coils. 
+.PP
+
+.in +1c
+.ti -1c
+.RI "virtual int \fBreadCoilsTable\fP (int startRef, char bitArr[], int refCnt)"
+.br
+.RI "\fIOverride this method to implement a Data Provider function to read Coils. \fP"
+.ti -1c
+.RI "virtual int \fBwriteCoilsTable\fP (int startRef, const char bitArr[], int refCnt)"
+.br
+.RI "\fIOverride this method to implement a Data Provider function to write Coils. \fP"
+.in -1c
+.SS "Data Access Methods for Table 1:00000 (Input Discretes)"
+Data Access Methods to support read discrete inputs (input status) in table 1:00000.
+.PP
+This table is accessed by the following Modbus functions:
+.PP
+.IP "\(bu" 2
+Modbus function 2 (02 hex), Read Inputs Status/Read Input Discretes.
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+Input Discretes cannot be written 
+.RE
+.PP
+
+.in +1c
+.ti -1c
+.RI "virtual int \fBreadInputDiscretesTable\fP (int startRef, char bitArr[], int refCnt)"
+.br
+.RI "\fIOverride this method to implement a Data Provider function to read Coils. \fP"
+.in -1c
+.SS "Data Access Synchronisation Functions"
+Implementation of these functions may only be required in multithreaded applications, if you are running the server loop in a separate thread and in addition require data consistency over a block of Modbus registers.
+.PP
+Data consistency within a single register is always maintained if the code executes on a 16-bit or 32-bit machine, because the CPU is accessing these data types atomically. 
+.in +1c
+.ti -1c
+.RI "virtual void \fBlock\fP ()"
+.br
+.RI "\fIYou can override this method to implement a semaphore locking mechanism to synchronise data access. \fP"
+.ti -1c
+.RI "virtual void \fBunlock\fP ()"
+.br
+.RI "\fIYou can override this method to implement a semaphore un-locking mechanism to synchronise data access. \fP"
+.in -1c
+.SS "Auxiliary Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBtimeOutHandler\fP ()"
+.br
+.RI "\fIOverride this method to implement a function to handle master poll time-outs. \fP"
+.ti -1c
+.RI "virtual char \fBreadExceptionStatus\fP ()"
+.br
+.RI "\fIOverride this method to implement a function with reports the eight exception status coils (bits) within the slave device. \fP"
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Modbus Slave C++ Library from the source code.

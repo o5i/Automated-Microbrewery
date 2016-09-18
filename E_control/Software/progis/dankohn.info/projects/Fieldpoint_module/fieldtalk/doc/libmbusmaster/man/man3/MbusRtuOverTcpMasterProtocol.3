@@ -1,0 +1,298 @@
+.TH "MbusRtuOverTcpMasterProtocol" 3 "26 May 2004" "Modbus Protocol Library Documentation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MbusRtuOverTcpMasterProtocol \- 
+.SH SYNOPSIS
+.br
+.PP
+Inherits \fBMbusTcpMasterProtocol\fP.
+.PP
+.SH "Detailed Description"
+.PP 
+Encapsulated Modbus RTU Master Protocol class. 
+
+This class realises the Encapsulated Modbus RTU master protocol. This protocol is also known as RTU over TCP or RTU/IP and used for example by ISaGraf® Soft-PLCs. This class provides functions to establish and to close a TCP/IP connection to the slave as well as data and control functions which can be used after a connection to a slave device has been established successfully. The data and control functions are organized different conformance classes. For a more detailed description of the data and control functions see section \fBData and Control Functions for all Protocol Flavours\fP.
+.PP
+It is also possible to instantiate multiple instances of this class for establishing multiple connections to either the same or different hosts.
+.PP
+\fBVersion:\fP
+.RS 4
+1.0 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBmbusmaster\fP 
+.PP
+\fBMbusMasterFunctions\fP 
+.RE
+.PP
+
+.PP
+.SS "TCP/IP Connection Management Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBcloseProtocol\fP ()"
+.br
+.RI "\fICloses a TCP/IP connection to a slave and releases any system resources associated with the connection. \fP"
+.ti -1c
+.RI "virtual int \fBisOpen\fP ()"
+.br
+.RI "\fIReturns whether currently connected or not. \fP"
+.ti -1c
+.RI "unsigned short \fBgetPort\fP ()"
+.br
+.RI "\fIReturns the TCP port number used by the protocol. \fP"
+.in -1c
+.SS "Class 0 Modbus Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBwriteMultipleRegisters\fP (int slaveAddr, int startRef, const short regArr[], int refCnt)"
+.br
+.RI "\fIModbus function 16 (10 hex), Preset Multiple Registers/Write Multiple Registers. \fP"
+.ti -1c
+.RI "int \fBwriteMultipleLongInts\fP (int slaveAddr, int startRef, const long int32Arr[], int refCnt)"
+.br
+.RI "\fIModbus function 16 (10 hex) for 32-bit long int data types, Preset Multiple Registers/Write Multiple Registers with long int data. \fP"
+.ti -1c
+.RI "int \fBwriteMultipleMod10000\fP (int slaveAddr, int startRef, const long int32Arr[], int refCnt)"
+.br
+.RI "\fIModbus function 16 (10 hex) for 32-bit modulo-10000 long int data types, Preset Multiple Registers/Write Multiple Registers with modulo-10000 long int data. \fP"
+.ti -1c
+.RI "int \fBwriteMultipleFloats\fP (int slaveAddr, int startRef, const float float32Arr[], int refCnt)"
+.br
+.RI "\fIModbus function 16 (10 hex) for 32-bit float data types, Preset Multiple Registers/Write Multiple Registers with float data. \fP"
+.ti -1c
+.RI "int \fBreadMultipleRegisters\fP (int slaveAddr, int startRef, short regArr[], int refCnt)"
+.br
+.RI "\fIModbus function 3 (03 hex), Read Holding Registers/Read Multiple Registers. \fP"
+.ti -1c
+.RI "int \fBreadMultipleLongInts\fP (int slaveAddr, int startRef, long int32Arr[], int refCnt)"
+.br
+.RI "\fIModbus function 3 (03 hex) for 32-bit long int data types, Read Holding Registers/Read Multiple Registers as long int data. \fP"
+.ti -1c
+.RI "int \fBreadMultipleMod10000\fP (int slaveAddr, int startRef, long int32Arr[], int refCnt)"
+.br
+.RI "\fIModbus function 3 (03 hex) for 32-bit modulo-10000 long int data types, Read Holding Registers/Read Multiple Registers as modulo-10000 long int data. \fP"
+.ti -1c
+.RI "int \fBreadMultipleFloats\fP (int slaveAddr, int startRef, float float32Arr[], int refCnt)"
+.br
+.RI "\fIModbus function 3 (03 hex) for 32-bit float data types, Read Holding Registers/Read Multiple Registers as float data. \fP"
+.in -1c
+.SS "Class 1 Modbus Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBreadCoils\fP (int slaveAddr, int startRef, int bitArr[], int refCnt)"
+.br
+.RI "\fIModbus function 1 (01 hex), Read Coil Status/Read Coils. \fP"
+.ti -1c
+.RI "int \fBreadInputDiscretes\fP (int slaveAddr, int startRef, int bitArr[], int refCnt)"
+.br
+.RI "\fIModbus function 2 (02 hex), Read Inputs Status/Read Input Discretes. \fP"
+.ti -1c
+.RI "int \fBreadInputRegisters\fP (int slaveAddr, int startRef, short regArr[], int refCnt)"
+.br
+.RI "\fIModbus function 4 (04 hex), Read Input Registers. \fP"
+.ti -1c
+.RI "int \fBreadInputLongInts\fP (int slaveAddr, int startRef, long int32Arr[], int refCnt)"
+.br
+.RI "\fIModbus function 4 (04 hex) for 32-bit long int data types, Read Input Registers as long int data. \fP"
+.ti -1c
+.RI "int \fBreadInputMod10000\fP (int slaveAddr, int startRef, long int32Arr[], int refCnt)"
+.br
+.RI "\fIModbus function 4 (04 hex) for 32-bit modulo-10000 long int data types, Read Input Registers as modulo-10000 long int data. \fP"
+.ti -1c
+.RI "int \fBreadInputFloats\fP (int slaveAddr, int startRef, float float32Arr[], int refCnt)"
+.br
+.RI "\fIModbus function 4 (04 hex) for 32-bit float data types, Read Input Registers as float data. \fP"
+.ti -1c
+.RI "int \fBwriteCoil\fP (int slaveAddr, int bitAddr, int bitVal)"
+.br
+.RI "\fIModbus function 5 (05 hex), Force Single Coil/Write Coil. \fP"
+.ti -1c
+.RI "int \fBwriteSingleRegister\fP (int slaveAddr, int regAddr, short regVal)"
+.br
+.RI "\fIModbus function 6 (06 hex), Preset Single Register/Write Single Register. \fP"
+.ti -1c
+.RI "int \fBreadExceptionStatus\fP (int slaveAddr, unsigned char *statusByte)"
+.br
+.RI "\fIModbus function 7 (07 hex), Read Exception Status. \fP"
+.in -1c
+.SS "Class 2 Modbus Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBforceMultipleCoils\fP (int slaveAddr, int startRef, const int bitArr[], int refCnt)"
+.br
+.RI "\fIModbus function 15 (0F hex), Force Multiple Coils. \fP"
+.ti -1c
+.RI "int \fBmaskWriteRegister\fP (int slaveAddr, int regAddr, unsigned short andMask, unsigned short orMask)"
+.br
+.RI "\fIModbus function 22 (16 hex), Mask Write Register. \fP"
+.ti -1c
+.RI "int \fBreadWriteRegisters\fP (int slaveAddr, int readRef, short readArr[], int readCnt, int writeRef, const short writeArr[], int writeCnt)"
+.br
+.RI "\fIModbus function 23 (17 hex), Read/Write Registers. \fP"
+.in -1c
+.SS "Protocol Configuration"
+
+.in +1c
+.ti -1c
+.RI "int \fBsetTimeout\fP (int timeOut)"
+.br
+.RI "\fIConfigures time-out. \fP"
+.ti -1c
+.RI "int \fBgetTimeout\fP ()"
+.br
+.RI "\fIReturns the time-out value. \fP"
+.ti -1c
+.RI "int \fBsetPollDelay\fP (int pollDelay)"
+.br
+.RI "\fIConfigures poll delay. \fP"
+.ti -1c
+.RI "int \fBgetPollDelay\fP ()"
+.br
+.RI "\fIReturns the poll delay time. \fP"
+.ti -1c
+.RI "int \fBsetRetryCnt\fP (int retryCnt)"
+.br
+.RI "\fIConfigures the automatic retry setting. \fP"
+.ti -1c
+.RI "int \fBgetRetryCnt\fP ()"
+.br
+.RI "\fIReturns the automatic retry count. \fP"
+.in -1c
+.SS "Transmission Statistic Functions"
+
+.in +1c
+.ti -1c
+.RI "unsigned long \fBgetTotalCounter\fP ()"
+.br
+.RI "\fIReturns how often a message transfer has been executed. \fP"
+.ti -1c
+.RI "void \fBresetTotalCounter\fP ()"
+.br
+.RI "\fIResets total message transfer counter. \fP"
+.ti -1c
+.RI "unsigned long \fBgetSuccessCounter\fP ()"
+.br
+.RI "\fIReturns how often a message transfer was successful. \fP"
+.ti -1c
+.RI "void \fBresetSuccessCounter\fP ()"
+.br
+.RI "\fIResets successful message transfer counter. \fP"
+.in -1c
+.SS "Word Order Configuration"
+
+.in +1c
+.ti -1c
+.RI "void \fBconfigureBigEndianInts\fP ()"
+.br
+.RI "\fIConfigures int data type functions to do a word swap. \fP"
+.ti -1c
+.RI "void \fBconfigureSwappedFloats\fP ()"
+.br
+.RI "\fIConfigures float data type functions to do a word swap. \fP"
+.ti -1c
+.RI "void \fBconfigureLittleEndianInts\fP ()"
+.br
+.RI "\fIConfigures int data type functions not to do a word swap. \fP"
+.ti -1c
+.RI "void \fBconfigureIeeeFloats\fP ()"
+.br
+.RI "\fIConfigures float data type functions not to do a word swap. \fP"
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMbusRtuOverTcpMasterProtocol\fP ()"
+.br
+.RI "\fIConstructs a MbusRtuOverTcpMasterProtocol object and initialises its data. \fP"
+.ti -1c
+.RI "int \fBopenProtocol\fP (const char *const hostName)"
+.br
+.RI "\fIConnects to a Encapsulated Modbus RTU slave. \fP"
+.ti -1c
+.RI "int \fBsetPort\fP (unsigned short portNo)"
+.br
+.RI "\fISets the TCP port number to be used by the protocol. \fP"
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBgetPackageVersion\fP ()"
+.br
+.RI "\fIReturns the package version number. \fP"
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "int openProtocol (const char *const hostName)"
+.PP
+Connects to a Encapsulated Modbus RTU slave. This function establishes a logical network connection between master and slave. After a connection has been established data and control functions can be used. A TCP/IP connection should be closed if it is no longer needed.
+.PP
+\fBNote:\fP
+.RS 4
+The default time-out for the connection is 1000 ms. 
+.PP
+The default TCP port number is 1100. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIhostName\fP String with IP address or host name 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+FTALK_SUCCESS on success or error code. See \fBProtocol Errors and Exceptions\fP for a list of error codes. 
+.RE
+.PP
+Reimplemented from \fBMbusTcpMasterProtocol\fP.
+.SS "int setPort (unsigned short portNo)"
+.PP
+Sets the TCP port number to be used by the protocol. \fBRemarks:\fP
+.RS 4
+Usually the port number remains unchanged and defaults to 1100. In this case no call to this function is necessary. However if the port number has to be different from 1100 this function must be called \fIbefore\fP opening the connection with \fBopenProtocol()\fP.
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIportNo\fP Port number to be used when opening the connection 
+.RE
+.PP
+\fBReturn values:\fP
+.RS 4
+\fIFTALK_SUCCESS\fP Success 
+.br
+\fIFTALK_ILLEGAL_STATE_ERROR\fP Protocol already open 
+.RE
+.PP
+Reimplemented from \fBMbusTcpMasterProtocol\fP.
+.SS "int isOpen ()\fC [virtual, inherited]\fP"
+.PP
+Returns whether currently connected or not. \fBReturn values:\fP
+.RS 4
+\fItrue\fP = connected 
+.br
+\fIfalse\fP = not connected 
+.RE
+.PP
+Reimplemented from \fBMbusMasterFunctions\fP.
+.SS "unsigned short getPort ()\fC [inherited]\fP"
+.PP
+Returns the TCP port number used by the protocol. \fBReturns:\fP
+.RS 4
+Port number used by the protocol 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Modbus Protocol Library Documentation from the source code.

@@ -1,0 +1,262 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/xhtml;charset="iso-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Language" content="en" />
+    <link rel="stylesheet" href="style.css">
+    <title>TreeView</title>
+    <style type="text/css">
+    <!--
+    .directory { font-size: 10pt; font-weight: bold; }
+    .directory h3 { margin: 0px; margin-top: 1em; font-size: 11pt; }
+    .directory p { margin: 0px; white-space: nowrap; }
+    .directory div { display: none; margin: 0px; }
+    .directory img { vertical-align: middle; }
+    -->
+    </style>
+    <script type="text/javascript">
+    <!-- // Hide script from old browsers
+    
+    function findChildNode(node, name) 
+    {
+      var temp;
+      if (node == null) 
+      {
+        return null;
+      } 
+      node = node.firstChild;
+      while (node != null) 
+      {
+        if (node.nodeName == name) 
+        {
+          return node;
+        }
+        temp = findChildNode(node, name);
+        if (temp != null) 
+        {
+          return temp;
+        }
+        node = node.nextSibling;
+      }
+      return null;
+    }
+
+    function toggleFolder(id, imageNode) 
+    {
+      var folder = document.getElementById(id);
+      var l = 0;
+      var vl = "ftv2vertline.png";
+      if (imageNode != null && imageNode.nodeName != "IMG") 
+      {
+        imageNode = findChildNode(imageNode, "IMG");
+        if (imageNode!=null) l = imageNode.src.length;
+      }
+      if (folder == null) 
+      {
+      } 
+      else if (folder.style.display == "block") 
+      {
+        while (imageNode != null && 
+               imageNode.src.substring(l-vl.length,l) == vl)
+        {
+          imageNode = imageNode.nextSibling;
+          l = imageNode.src.length;
+        }
+        if (imageNode != null) 
+        {
+          l = imageNode.src.length;
+          imageNode.nextSibling.src = "ftv2folderclosed.png";
+          if (imageNode.src.substring(l-13,l) == "ftv2mnode.png")
+          {
+            imageNode.src = "ftv2pnode.png";
+          }
+          else if (imageNode.src.substring(l-17,l) == "ftv2mlastnode.png")
+          {
+            imageNode.src = "ftv2plastnode.png";
+          }
+        }
+        folder.style.display = "none";
+      } 
+      else 
+      {
+        while (imageNode != null && 
+               imageNode.src.substring(l-vl.length,l) == vl)
+        {
+          imageNode = imageNode.nextSibling;
+          l = imageNode.src.length;
+        }
+        if (imageNode != null) 
+        {
+          l = imageNode.src.length;
+          imageNode.nextSibling.src = "ftv2folderopen.png";
+          if (imageNode.src.substring(l-13,l) == "ftv2pnode.png")
+          {
+            imageNode.src = "ftv2mnode.png";
+          }
+          else if (imageNode.src.substring(l-17,l) == "ftv2plastnode.png")
+          {
+            imageNode.src = "ftv2mlastnode.png";
+          }
+        }
+        folder.style.display = "block";
+      }
+    }
+
+    // End script hiding -->        
+    </script>
+  </head>
+
+  <body bgcolor="#ffffff">
+    <div class="directory">
+      <h3>Modbus Protocol Library Documentation</h3>
+      <div style="display: block;">
+        <p><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="main.html" target="basefrm">General Description</a></p>
+        <p><img src="ftv2pnode.png" alt="o" width=16 height=22 onclick="toggleFolder('folder1', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder1', this)"/><a class="el" href="annotated.html" target="basefrm">Compound List</a></p>
+        <div id="folder1">
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00008.html" target="basefrm">MbusAsciiMasterProtocol</a></p>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00009.html" target="basefrm">MbusMasterFunctions</a></p>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00010.html" target="basefrm">MbusRtuMasterProtocol</a></p>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00011.html" target="basefrm">MbusRtuOverTcpMasterProtocol</a></p>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00012.html" target="basefrm">MbusSerialMasterProtocol</a></p>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2lastnode.png" alt="\" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00013.html" target="basefrm">MbusTcpMasterProtocol</a></p>
+        </div>
+        <p><img src="ftv2pnode.png" alt="o" width=16 height=22 onclick="toggleFolder('folder2', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder2', this)"/><a class="el" href="hierarchy.html" target="basefrm">Class Hierarchy</a></p>
+        <div id="folder2">
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2plastnode.png" alt="\" width=16 height=22 onclick="toggleFolder('folder3', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder3', this)"/><a class="el" href="a00009.html" target="basefrm">MbusMasterFunctions</a></p>
+          <div id="folder3">
+            <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2pnode.png" alt="o" width=16 height=22 onclick="toggleFolder('folder4', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder4', this)"/><a class="el" href="a00012.html" target="basefrm">MbusSerialMasterProtocol</a></p>
+            <div id="folder4">
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00008.html" target="basefrm">MbusAsciiMasterProtocol</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2lastnode.png" alt="\" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00010.html" target="basefrm">MbusRtuMasterProtocol</a></p>
+            </div>
+            <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2plastnode.png" alt="\" width=16 height=22 onclick="toggleFolder('folder5', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder5', this)"/><a class="el" href="a00013.html" target="basefrm">MbusTcpMasterProtocol</a></p>
+            <div id="folder5">
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2lastnode.png" alt="\" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00011.html" target="basefrm">MbusRtuOverTcpMasterProtocol</a></p>
+            </div>
+          </div>
+        </div>
+        <p><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="functions.html" target="basefrm">Compound Members</a></p>
+        <p><img src="ftv2pnode.png" alt="o" width=16 height=22 onclick="toggleFolder('folder6', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder6', this)"/><a class="el" href="modules.html" target="basefrm">Modules</a></p>
+        <div id="folder6">
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2pnode.png" alt="o" width=16 height=22 onclick="toggleFolder('folder7', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder7', this)"/><a class="el" href="a00036.html" target="basefrm">Data and Control Functions for all Protocol Flavours</a></p>
+          <div id="folder7">
+            <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2plastnode.png" alt="\" width=16 height=22 onclick="toggleFolder('folder8', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder8', this)"/><a class="el" href="a00036.html" target="basefrm">Functions</a></p>
+            <div id="folder8">
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a0" target="basefrm">writeMultipleRegisters</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a1" target="basefrm">readCoils</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a2" target="basefrm">forceMultipleCoils</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a3" target="basefrm">setTimeout</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a4" target="basefrm">getTotalCounter</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a5" target="basefrm">configureBigEndianInts</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a6" target="basefrm">getPackageVersion</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a7" target="basefrm">writeMultipleLongInts</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a8" target="basefrm">writeMultipleMod10000</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a9" target="basefrm">writeMultipleFloats</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a10" target="basefrm">readMultipleRegisters</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a11" target="basefrm">readMultipleLongInts</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a12" target="basefrm">readMultipleMod10000</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a13" target="basefrm">readMultipleFloats</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a14" target="basefrm">readInputDiscretes</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a15" target="basefrm">readInputRegisters</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a16" target="basefrm">readInputLongInts</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a17" target="basefrm">readInputMod10000</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a18" target="basefrm">readInputFloats</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a19" target="basefrm">writeCoil</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a20" target="basefrm">writeSingleRegister</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a21" target="basefrm">readExceptionStatus</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a22" target="basefrm">maskWriteRegister</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a23" target="basefrm">readWriteRegisters</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a24" target="basefrm">getTimeout</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a25" target="basefrm">setPollDelay</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a26" target="basefrm">getPollDelay</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a27" target="basefrm">setRetryCnt</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a28" target="basefrm">getRetryCnt</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a30" target="basefrm">getSuccessCounter</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a32" target="basefrm">configureSwappedFloats</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a33" target="basefrm">configureLittleEndianInts</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2lastnode.png" alt="\" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00036.html#a34" target="basefrm">configureIeeeFloats</a></p>
+            </div>
+          </div>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2pnode.png" alt="o" width=16 height=22 onclick="toggleFolder('folder9', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder9', this)"/><a class="el" href="a00037.html" target="basefrm">Device and Vendor Specific Functions</a></p>
+          <div id="folder9">
+            <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2plastnode.png" alt="\" width=16 height=22 onclick="toggleFolder('folder10', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder10', this)"/><a class="el" href="a00037.html" target="basefrm">Functions</a></p>
+            <div id="folder10">
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2lastnode.png" alt="\" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00037.html#a0" target="basefrm">adamSendReceiveAsciiCmd</a></p>
+            </div>
+          </div>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2pnode.png" alt="o" width=16 height=22 onclick="toggleFolder('folder11', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder11', this)"/><a class="el" href="a00038.html" target="basefrm">MODBUS/TCP Protocol</a></p>
+          <div id="folder11">
+            <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2plastnode.png" alt="\" width=16 height=22 onclick="toggleFolder('folder12', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder12', this)"/><a class="el" href="a00038.html" target="basefrm">Classes</a></p>
+            <div id="folder12">
+            </div>
+          </div>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2pnode.png" alt="o" width=16 height=22 onclick="toggleFolder('folder13', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder13', this)"/><a class="el" href="a00039.html" target="basefrm">Serial Protocols</a></p>
+          <div id="folder13">
+            <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2plastnode.png" alt="\" width=16 height=22 onclick="toggleFolder('folder14', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder14', this)"/><a class="el" href="a00039.html" target="basefrm">Classes</a></p>
+            <div id="folder14">
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00008.html" target="basefrm">MbusAsciiMasterProtocol</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2lastnode.png" alt="\" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00010.html" target="basefrm">MbusRtuMasterProtocol</a></p>
+            </div>
+          </div>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2pnode.png" alt="o" width=16 height=22 onclick="toggleFolder('folder15', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder15', this)"/><a class="el" href="a00040.html" target="basefrm">Encapsulated Modbus RTU Protocol</a></p>
+          <div id="folder15">
+            <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2plastnode.png" alt="\" width=16 height=22 onclick="toggleFolder('folder16', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder16', this)"/><a class="el" href="a00040.html" target="basefrm">Classes</a></p>
+            <div id="folder16">
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2lastnode.png" alt="\" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00011.html" target="basefrm">MbusRtuOverTcpMasterProtocol</a></p>
+            </div>
+          </div>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2plastnode.png" alt="\" width=16 height=22 onclick="toggleFolder('folder17', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder17', this)"/><a class="el" href="a00041.html" target="basefrm">Protocol Errors and Exceptions</a></p>
+          <div id="folder17">
+            <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2pnode.png" alt="o" width=16 height=22 onclick="toggleFolder('folder18', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder18', this)"/><a class="el" href="a00041.html" target="basefrm">Defines</a></p>
+            <div id="folder18">
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a1" target="basefrm">FTALK_SUCCESS</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a2" target="basefrm">FTALK_ILLEGAL_ARGUMENT_ERROR</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a3" target="basefrm">FTALK_ILLEGAL_STATE_ERROR</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a4" target="basefrm">FTALK_EVALUATION_EXPIRED</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a5" target="basefrm">FTALK_IO_ERROR_CLASS</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a6" target="basefrm">FTALK_IO_ERROR</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a7" target="basefrm">FTALK_OPEN_ERR</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a8" target="basefrm">FTALK_PORT_ALREADY_OPEN</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a9" target="basefrm">FTALK_TCPIP_CONNECT_ERR</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a10" target="basefrm">FTALK_CONNECTION_WAS_CLOSED</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a11" target="basefrm">FTALK_SOCKET_LIB_ERROR</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a12" target="basefrm">FTALK_PORT_ALREADY_BOUND</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a13" target="basefrm">FTALK_LISTEN_FAILED</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a14" target="basefrm">FTALK_FILEDES_EXCEEDED</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a15" target="basefrm">FTALK_PORT_NO_ACCESS</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a16" target="basefrm">FTALK_PORT_NOT_AVAIL</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a17" target="basefrm">FTALK_BUS_PROTOCOL_ERROR_CLASS</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a18" target="basefrm">FTALK_CHECKSUM_ERROR</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a19" target="basefrm">FTALK_INVALID_FRAME_ERROR</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a20" target="basefrm">FTALK_INVALID_REPLY_ERROR</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a21" target="basefrm">FTALK_REPLY_TIMEOUT_ERROR</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a22" target="basefrm">FTALK_SEND_TIMEOUT_ERROR</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a23" target="basefrm">FTALK_MBUS_EXCEPTION_RESPONSE</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a24" target="basefrm">FTALK_MBUS_ILLEGAL_FUNCTION_RESPONSE</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a25" target="basefrm">FTALK_MBUS_ILLEGAL_ADDRESS_RESPONSE</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a26" target="basefrm">FTALK_MBUS_ILLEGAL_VALUE_RESPONSE</a></p>
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2lastnode.png" alt="\" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a27" target="basefrm">FTALK_MBUS_SLAVE_FAILURE_RESPONSE</a></p>
+            </div>
+            <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2plastnode.png" alt="\" width=16 height=22 onclick="toggleFolder('folder19', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder19', this)"/><a class="el" href="a00041.html" target="basefrm">Functions</a></p>
+            <div id="folder19">
+              <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2blank.png" alt="&nbsp;" width=16 height=22 /><img src="ftv2lastnode.png" alt="\" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="a00041.html#a0" target="basefrm">getBusProtocolErrorText</a></p>
+            </div>
+          </div>
+        </div>
+        <p><img src="ftv2pnode.png" alt="o" width=16 height=22 onclick="toggleFolder('folder20', this)"/><img src="ftv2folderclosed.png" alt="+" width=24 height=22 onclick="toggleFolder('folder20', this)"/><a class="el" href="pages.html" target="basefrm">Related Pages</a></p>
+        <div id="folder20">
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="integrate.html" target="basefrm">How to integrate the Protocol in your Application</a></p>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="examples.html" target="basefrm">Examples</a></p>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="modbus.html" target="basefrm">What You should know about Modbus</a></p>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="install.html" target="basefrm">Installation and Source Code Compilation</a></p>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="linking.html" target="basefrm">Linking your Applications against the Library</a></p>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="design.html" target="basefrm">Design Background</a></p>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="license.html" target="basefrm">License</a></p>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2node.png" alt="o" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="support.html" target="basefrm">Support</a></p>
+          <p><img src="ftv2vertline.png" alt="|" width=16 height=22 /><img src="ftv2lastnode.png" alt="\" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="notices.html" target="basefrm">Notices</a></p>
+        </div>
+        <p><img src="ftv2lastnode.png" alt="\" width=16 height=22 /><img src="ftv2doc.png" alt="*" width=24 height=22 /><a class="el" href="inherits.html" target="basefrm">Graphical Class Hierarchy</a></p>
+      </div>
+    </div>
+  </body>
+</html>

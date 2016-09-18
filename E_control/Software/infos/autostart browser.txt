@@ -1,0 +1,21 @@
+[Unit]
+Description=SCRIPT TO RUN AFTER BOOTING
+After=syslog.target
+After=rc-local.service
+After=systemd-user-sessions.service plymouth-quit-wait.service
+[Service]
+ExecStart=/usr/bin/xinit /etc/beermachine/startbrowser.sh
+Type=idle
+Restart=always
+[Install]
+WantedBy=multi-user.target
+
+
+
+#!/bin/sh
+xset -dpms     # disable DPMS (Energy Star) features.
+xset s off       # disable screen saver
+xset s noblank # don't blank the video device
+unclutter & #hide mouse pointer
+matchbox-window-manager -use_cursor no -use_titlebar no  &
+midori -e Fullscreen -a http://m.androidwallpapercentral.com/downloads/AndroidWallpaperNightSkyZ.jpg

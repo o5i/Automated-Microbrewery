@@ -1,0 +1,515 @@
+.TH "Data Provider" 3 "20 Oct 2006" "Modbus Slave C++ Library" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Data Provider \- 
+.SH "Detailed Description"
+.PP 
+A Data Provider acts as an agent between your Application and the Server Engine. 
+.PP
+After instantiating a Server Engine class of any protocol flavour, you have to associate it with a Data Provider by calling addDataTable and passing a pointer to the Data Provider object.
+.PP
+ 
+.PP
+.PP
+.nf
+ MbusRtuSlaveProtocol mbusProtocol;
+ mbusProtocol.addDataTable(1, &dataTable);
+.fi
+.PP
+.PP
+To create an application specific Data Provider derive a new class from \fBMbusDataTableInterface\fP and override the required data access methods.
+.PP
+A minimal Data Provider which realises a Modbus slave with read access to holding registers would be: 
+.PP
+.nf
+class MyDataProvider: public MbusDataTableInterface
+{
+  public:
+
+   MyDataProvider() {}
+
+   // Override readHoldingRegistersTable method:
+   int readHoldingRegistersTable(int startRef, short regArr[], int refCnt)
+   {
+      ... your application specific implementation
+   }
+};
+
+.fi
+.PP
+ 
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBMbusDataTableInterface\fP"
+.br
+.RI "\fIThis class defines the interface between a Modbus slave Server Engine and your application. Descendants of this class are referred to as Data Providers. \fP"
+.in -1c
+.SS "Data Access Methods for Table 4:00000 (Holding Registers)"
+Data Access Methods to support read and write of output registers (holding registers) in table 4:00000.
+.PP
+This table is accessed by the following Modbus functions:
+.PP
+.IP "\(bu" 2
+Modbus function 16 (10 hex), Preset Multiple Registers/Write Multiple Registers
+.IP "\(bu" 2
+Modbus function 3 (03 hex), Read Holding Registers/Read Multiple Registers
+.IP "\(bu" 2
+Modbus function 6 (06 hex), Preset Single Register/Write Single Register.
+.IP "\(bu" 2
+Modbus function 22 (16 hex), Mask Write Register.
+.IP "\(bu" 2
+Modbus function 23 (17 hex), Read/Write Registers. 
+.PP
+
+.in +1c
+.ti -1c
+.RI "virtual int \fBMbusDataTableInterface::readHoldingRegistersTable\fP (int startRef, short regArr[], int refCnt)"
+.br
+.RI "\fIOverride this method to implement a Data Provider function to read Holding Registers. \fP"
+.ti -1c
+.RI "virtual int \fBMbusDataTableInterface::writeHoldingRegistersTable\fP (int startRef, const short regArr[], int refCnt)"
+.br
+.RI "\fIOverride this method to implement a Data Provider function to write Holding Registers. \fP"
+.in -1c
+.SS "Data Access Methods for Table 3:00000 (Input Registers)"
+Data Access Methods to support read of input registers in table 3:00000.
+.PP
+This table is accessed by the following Modbus functions:
+.PP
+.IP "\(bu" 2
+Modbus function 4 (04 hex), Read Input Registers.
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+Input registers cannot be written 
+.RE
+.PP
+
+.in +1c
+.ti -1c
+.RI "virtual int \fBMbusDataTableInterface::readInputRegistersTable\fP (int startRef, short regArr[], int refCnt)"
+.br
+.RI "\fIOverride this method to implement a Data Provider function to read Input Registers. \fP"
+.in -1c
+.SS "Data Access Methods for Table 0:00000 (Coils)"
+Data Access Methods to support read and write of discrete outputs (coils) in table 0:00000.
+.PP
+This table is accessed by the following Modbus functions:
+.PP
+.IP "\(bu" 2
+Modbus function 1 (01 hex), Read Coil Status/Read Coils.
+.IP "\(bu" 2
+Modbus function 5 (05 hex), Force Single Coil/Write Coil.
+.IP "\(bu" 2
+Modbus function 15 (0F hex), Force Multiple Coils. 
+.PP
+
+.in +1c
+.ti -1c
+.RI "virtual int \fBMbusDataTableInterface::readCoilsTable\fP (int startRef, char bitArr[], int refCnt)"
+.br
+.RI "\fIOverride this method to implement a Data Provider function to read Coils. \fP"
+.ti -1c
+.RI "virtual int \fBMbusDataTableInterface::writeCoilsTable\fP (int startRef, const char bitArr[], int refCnt)"
+.br
+.RI "\fIOverride this method to implement a Data Provider function to write Coils. \fP"
+.in -1c
+.SS "Data Access Methods for Table 1:00000 (Input Discretes)"
+Data Access Methods to support read discrete inputs (input status) in table 1:00000.
+.PP
+This table is accessed by the following Modbus functions:
+.PP
+.IP "\(bu" 2
+Modbus function 2 (02 hex), Read Inputs Status/Read Input Discretes.
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+Input Discretes cannot be written 
+.RE
+.PP
+
+.in +1c
+.ti -1c
+.RI "virtual int \fBMbusDataTableInterface::readInputDiscretesTable\fP (int startRef, char bitArr[], int refCnt)"
+.br
+.RI "\fIOverride this method to implement a Data Provider function to read Coils. \fP"
+.in -1c
+.SS "Data Access Synchronisation Functions"
+Implementation of these functions may only be required in multithreaded applications, if you are running the server loop in a separate thread and in addition require data consistency over a block of Modbus registers.
+.PP
+Data consistency within a single register is always maintained if the code executes on a 16-bit or 32-bit machine, because the CPU is accessing these data types atomically. 
+.in +1c
+.ti -1c
+.RI "virtual void \fBMbusDataTableInterface::lock\fP ()"
+.br
+.RI "\fIYou can override this method to implement a semaphore locking mechanism to synchronise data access. \fP"
+.ti -1c
+.RI "virtual void \fBMbusDataTableInterface::unlock\fP ()"
+.br
+.RI "\fIYou can override this method to implement a semaphore un-locking mechanism to synchronise data access. \fP"
+.in -1c
+.SS "Auxiliary Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBMbusDataTableInterface::timeOutHandler\fP ()"
+.br
+.RI "\fIOverride this method to implement a function to handle master poll time-outs. \fP"
+.ti -1c
+.RI "virtual char \fBMbusDataTableInterface::readExceptionStatus\fP ()"
+.br
+.RI "\fIOverride this method to implement a function with reports the eight exception status coils (bits) within the slave device. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "virtual int readHoldingRegistersTable (int startRef, short regArr[], int refCnt)\fC [virtual, inherited]\fP"
+.PP
+Override this method to implement a Data Provider function to read Holding Registers. 
+.PP
+When a slave receives a poll request for the 4:00000 data table he calls this method to retrieve the data.
+.PP
+A simple implementation which holds the application data in an array of shorts (\fCshort regData[0x10000]\fP) could be: 
+.PP
+.nf
+   int readHoldingRegistersTable(int startRef, short regArr[], int refCnt)
+   {
+      startRef--; // Adjust Modbus reference counting
+
+      if (startRef + refCnt > (int) sizeof(regData) / sizeof(short))
+         return (0);
+
+      memcpy(regArr, &regData[startRef], refCnt * sizeof(short));
+      return (1);
+   }
+
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstartRef\fP Start register (Range: 1 - 0x10000) 
+.br
+\fIregArr\fP Buffer which has to be filled with the reply data 
+.br
+\fIrefCnt\fP Number of registers to be retrieved (Range: 0 - 125)
+.RE
+.PP
+\fBReturn values:\fP
+.RS 4
+\fI1\fP Indicate a successful access and that valid reply data is contained in regArr. The Server Engine will reply the data passed in regArr to the master. 
+.br
+\fI0\fP Indicate that access has been denied or is out of range. The Server Engine will reply to the master with an exception reply message
+.RE
+.PP
+\fBRequired:\fP.RS 4
+Yes 
+.RE
+.PP
+\fBDefault Implementation:\fP.RS 4
+Returns 0 which indicates to Server Engine that this address range is unsupported. 
+.RE
+.PP
+
+.SS "virtual int readInputRegistersTable (int startRef, short regArr[], int refCnt)\fC [virtual, inherited]\fP"
+.PP
+Override this method to implement a Data Provider function to read Input Registers. 
+.PP
+When a slave receives a poll request for the 3:00000 data table he calls this method to retrieve the data.
+.PP
+A simple and very common implementation is to map the Input Registers to the same address space than the Holding Registers table: 
+.PP
+.nf
+   int readInputRegistersTable(int startRef, short regArr[], int refCnt)
+   {
+      return (readHoldingRegistersTable(startRef, regArr, refCnt);
+   }
+
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstartRef\fP Start register (Range: 1 - 0x10000) 
+.br
+\fIregArr\fP Buffer which has to be filled with the reply data 
+.br
+\fIrefCnt\fP Number of registers to be retrieved (Range: 0 - 125)
+.RE
+.PP
+\fBReturn values:\fP
+.RS 4
+\fI1\fP Indicate a successful access and that valid reply data is contained in regArr. The Server Engine will reply the data passed in regArr to the master. 
+.br
+\fI0\fP Indicate that access has been denied or is out of range. The Server Engine will reply to the master with an exception reply message
+.RE
+.PP
+\fBRequired:\fP.RS 4
+No 
+.RE
+.PP
+\fBDefault Implementation:\fP.RS 4
+Returns 0 which indicates to Server Engine that this address range is unsupported. 
+.RE
+.PP
+
+.SS "virtual int readCoilsTable (int startRef, char bitArr[], int refCnt)\fC [virtual, inherited]\fP"
+.PP
+Override this method to implement a Data Provider function to read Coils. 
+.PP
+When a slave receives a poll request for the 0:00000 data table he calls this method to retrieve the data.
+.PP
+A simple implementation which holds the boolean application data in an array of chars (\fCchar bitData[2000]\fP) could be: 
+.PP
+.nf
+   int readCoilsTable(int startRef, char bitArr[], int refCnt)
+   {
+      startRef--; // Adjust Modbus reference counting
+
+      if (startRef + refCnt > (int) sizeof(bitData) / sizeof(char))
+         return (0);
+
+      memcpy(bitArr, &bitData[startRef], refCnt * sizeof(char));
+      return (1);
+   }
+
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstartRef\fP Start register (Range: 1 - 0x10000) 
+.br
+\fIbitArr\fP Buffer which has to be filled with the reply data. Each char represents one coil! 
+.br
+\fIrefCnt\fP Number of coils to be retrieved (Range: 0 - 2000)
+.RE
+.PP
+\fBReturn values:\fP
+.RS 4
+\fI1\fP Indicate a successful access and that valid reply data is contained in regArr. The Server Engine will reply the data passed in regArr to the master. 
+.br
+\fI0\fP Indicate that access has been denied or is out of range. The Server Engine will reply to the master with an exception reply message
+.RE
+.PP
+\fBRequired:\fP.RS 4
+No 
+.RE
+.PP
+\fBDefault Implementation:\fP.RS 4
+Returns 0 which indicates to Server Engine that this address range is unsupported. 
+.RE
+.PP
+
+.SS "virtual int readInputDiscretesTable (int startRef, char bitArr[], int refCnt)\fC [virtual, inherited]\fP"
+.PP
+Override this method to implement a Data Provider function to read Coils. 
+.PP
+When a slave receives a poll request for the 0:00000 data table he calls this method to retrieve the data.
+.PP
+A simple and very common implementation is to map the Input Discretes to the same address space than the Coils table: 
+.PP
+.nf
+   int readInputDiscretesTable(int startRef, char bitArr[], int refCnt)
+   {
+      return (readCoilsTable(startRef, bitArr, refCnt));
+   }
+
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstartRef\fP Start register (Range: 1 - 0x10000) 
+.br
+\fIbitArr\fP Buffer which has to be filled with the reply data. Each char repesents one discrete! 
+.br
+\fIrefCnt\fP Number of discretes to be retrieved (Range: 0 - 2000)
+.RE
+.PP
+\fBReturn values:\fP
+.RS 4
+\fI1\fP Indicate a successful access and that valid reply data is contained in regArr. The Server Engine will reply the data passed in regArr to the master. 
+.br
+\fI0\fP Indicate that access has been denied or is out of range. The Server Engine will reply to the master with an exception reply message
+.RE
+.PP
+\fBRequired:\fP.RS 4
+No 
+.RE
+.PP
+\fBDefault Implementation:\fP.RS 4
+Returns 0 which indicates to Server Engine that this address range is unsupported. 
+.RE
+.PP
+
+.SS "virtual void lock ()\fC [virtual, inherited]\fP"
+.PP
+You can override this method to implement a semaphore locking mechanism to synchronise data access. 
+.PP
+This is not needed in single threaded applications but may be necessary in multithreaded applications if you are running the server loop in a separate thread and require data consistency over a block of Modbus registers. Data consistency within a single register is always maintained if the code executes on a 16-bit or 32-bit machine, because the CPU is accessing these data types atomically.
+.PP
+This function is called by the server before calling any data read or write functions.
+.PP
+\fBRequired:\fP.RS 4
+No 
+.RE
+.PP
+\fBDefault Implementation:\fP.RS 4
+Empty 
+.RE
+.PP
+
+.SS "virtual void timeOutHandler ()\fC [virtual, inherited]\fP"
+.PP
+Override this method to implement a function to handle master poll time-outs. 
+.PP
+A master should poll a slave cyclically. If no master is polling within the time-out period this method is called. A slave can take certain actions if the master has lost connection, e.g. go into a fail-safe state.
+.PP
+\fBRequired:\fP.RS 4
+No 
+.RE
+.PP
+\fBDefault Implementation:\fP.RS 4
+Empty 
+.RE
+.PP
+
+.SS "virtual int writeHoldingRegistersTable (int startRef, const short regArr[], int refCnt)\fC [virtual, inherited]\fP"
+.PP
+Override this method to implement a Data Provider function to write Holding Registers. 
+.PP
+When a slave receives a write request for the 4:00000 data table he calls this method to pass the data to the application.
+.PP
+A simple implementation which holds the application data in an array of shorts (\fCshort regData[0x10000]\fP) could be: 
+.PP
+.nf
+   int writeHoldingRegistersTable(int startRef, const short regArr[], int refCnt)
+   {
+      startRef--; // Adjust Modbus reference counting
+
+      if (startRef + refCnt > (int) sizeof(regData) / sizeof(short))
+         return (0);
+
+      memcpy(&regData[startRef], regArr, refCnt * sizeof(short));
+      return (1);
+   }
+
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstartRef\fP Start register (Range: 1 - 0x10000) 
+.br
+\fIregArr\fP Buffer which contains the received data 
+.br
+\fIrefCnt\fP Number of registers received (Range: 0 - 125)
+.RE
+.PP
+\fBReturn values:\fP
+.RS 4
+\fI1\fP Indicate a successful access. The Server Engine will send a positive reply to the master. 
+.br
+\fI0\fP Indicate that access has been denied or is out of range. The Server Engine will reply to the master with an exception reply message
+.RE
+.PP
+\fBRequired:\fP.RS 4
+Yes 
+.RE
+.PP
+\fBDefault Implementation:\fP.RS 4
+Returns 0 which indicates to Server Engine that this address range is unsupported. 
+.RE
+.PP
+
+.SS "virtual int writeCoilsTable (int startRef, const char bitArr[], int refCnt)\fC [virtual, inherited]\fP"
+.PP
+Override this method to implement a Data Provider function to write Coils. 
+.PP
+When a slave receives a write request for the 0:00000 data table he calls this method to pass the data to the application.
+.PP
+A simple implementation which holds the boolean application data in an array of chars (\fCchar bitData[2000]\fP) could be: 
+.PP
+.nf
+   int writeCoilsTable(int startRef, const char bitArr[], int refCnt)
+   {
+      startRef--; // Adjust Modbus reference counting
+
+      if (startRef + refCnt > (int) sizeof(bitData) / sizeof(char))
+         return (0);
+
+      memcpy(&bitData[startRef], bitArr, refCnt * sizeof(char));
+      return (1);
+   }
+
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstartRef\fP Start register (Range: 1 - 0x10000) 
+.br
+\fIbitArr\fP Buffer which contains the received data. Each char repesents one coil! 
+.br
+\fIrefCnt\fP Number of coils received (Range: 0 - 2000)
+.RE
+.PP
+\fBReturn values:\fP
+.RS 4
+\fI1\fP Indicate a successful access. The Server Engine will send a positive reply to the master. 
+.br
+\fI0\fP Indicate that access has been denied or is out of range. The Server Engine will reply to the master with an exception reply message
+.RE
+.PP
+\fBRequired:\fP.RS 4
+No 
+.RE
+.PP
+\fBDefault Implementation:\fP.RS 4
+Returns 0 which indicates to Server Engine that this address range is unsupported. 
+.RE
+.PP
+
+.SS "virtual void unlock ()\fC [virtual, inherited]\fP"
+.PP
+You can override this method to implement a semaphore un-locking mechanism to synchronise data access. 
+.PP
+This is not needed in single threaded applications but may be necessary in multithreaded applications if you are running the server loop in a separate thread and require data consistency over a block of Modbus registers. Data consistency within a single register is always maintained if the code executes on a 16-bit or 32-bit machine, because the CPU is accessing these data types atomically.
+.PP
+This function is called by the server after calling any data read or write functions.
+.PP
+\fBRequired:\fP.RS 4
+No 
+.RE
+.PP
+\fBDefault Implementation:\fP.RS 4
+Empty 
+.RE
+.PP
+
+.SS "virtual char readExceptionStatus ()\fC [virtual, inherited]\fP"
+.PP
+Override this method to implement a function with reports the eight exception status coils (bits) within the slave device. 
+.PP
+The exception status coils are device specific and usually used to report a device' principal status or a device' major failure codes as a 8-bit word.
+.PP
+\fBReturns:\fP
+.RS 4
+Exception status byte
+.RE
+.PP
+\fBRequired:\fP.RS 4
+No 
+.RE
+.PP
+\fBDefault Implementation:\fP.RS 4
+Returns 0 as exception status byte. 
+.RE
+.PP
+

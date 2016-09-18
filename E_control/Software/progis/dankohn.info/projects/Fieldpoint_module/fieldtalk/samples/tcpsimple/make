@@ -1,0 +1,51 @@
+#!/bin/sh
+#
+# make - FieldTalk C++ example applications build shell script
+#
+# Note: Build environments and compiler versions are changing frequently.
+# If you cannot build this module, please modify this script and report
+# the changes to support@focus-sw.com. Thank You.
+#
+# FOCUS Software Engineering Pty Ltd, Australia. <www.focus-sw.com>
+#
+# Requires: A supported UNIX version (see platform file)
+#
+
+
+#
+# Detect platform and configure compiler settings
+#
+if test -x ../../src/platform."$1"; then
+   . ../../src/platform."$1"
+else
+   . ../../src/platform
+fi
+
+
+#
+# Definition of files involved in the compilation process
+#
+TARGET_NAME=tcpsimple
+
+TARGET_DIR=${OS_EXT}
+
+LIB_DIR=../../lib/${OS_EXT}
+
+LIB_NAME=${LIB_DIR}/libmbusmaster.a
+
+#
+# Compilation commands
+# Note: LDFLAGS has to be the last entry for linking with m68k-elf-g++/ucLinux!
+#
+if test ! -d ${TARGET_DIR}; then
+   mkdir -p ${TARGET_DIR} || exit 1
+fi
+echo ${CXX} ${CXXFLAGS} -I../../include -o ${TARGET_DIR}/${TARGET_NAME} \
+   ${TARGET_NAME}.cpp ${LIB_NAME} ${LDFLAGS}
+(${CXX} ${CXXFLAGS} -I../../include -o ${TARGET_DIR}/${TARGET_NAME} \
+   ${TARGET_NAME}.cpp ${LIB_NAME} ${LDFLAGS} ) || exit 1
+
+echo ""
+echo "${TARGET_NAME} successfully compiled."
+echo ""
+

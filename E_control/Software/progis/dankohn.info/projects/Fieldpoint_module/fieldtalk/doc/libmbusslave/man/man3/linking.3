@@ -1,0 +1,95 @@
+.TH "linking" 3 "20 Oct 2006" "Modbus Slave C++ Library" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+linking \- Linking your Applications against the Library
+.SH "Linux, UNIX and QNX Systems: Compiling and Linking Applications"
+.PP
+Let's assume the following project directory structure:
+.PP
+.PP
+.nf
+             myprj
+               |
+               +-- fieldtalk
+                   |
+                   +-- doc
+                   +-- samples
+                   +-- src
+                   +-- include
+                   +-+ lib
+                     |
+                     +-- linux     (exact name depends on your platform)
+.fi
+.PP
+.PP
+Add the library's include directory to the compiler's include path.
+.PP
+Example: 
+.PP
+.nf
+c++ -Ifieldtalk/include -c myapp.cpp
+
+.fi
+.PP
+.PP
+Add the file name of the library to the file list passed to the linker.
+.PP
+Example: 
+.PP
+.nf
+c++ -o myapp myapp.o fieldtalk/lib/linux/libmbusmaster.a
+
+.fi
+.PP
+.SH "Windows Systems: Compiling and Linking Applications"
+.PP
+Let's assume the following project directory structure:
+.PP
+.PP
+.nf
+             myprj
+               |
+               +-- fieldtalk
+                   |
+                   +-- doc
+                   +-- samples
+                   +-- src
+                   +-- include
+                   +-+ lib
+                     |
+                     +-- win
+                         |
+                         +-- win32
+                             |
+                             +-- release
+.fi
+.PP
+.PP
+Add the library's include directory to the compiler's include path.
+.PP
+Visual C++ Example: 
+.PP
+.nf
+cl -Ifieldtalk/include -c myapp.cpp
+
+.fi
+.PP
+ Borland C++ Example: 
+.PP
+.nf
+bcc32 -Ifieldtalk/include -c myapp.cpp
+
+.fi
+.PP
+.PP
+Add the file name of the library to the file list passed to the linker. Visual C++ only: If you are using the Modbus/TCP protocol you have to add the Winsock2 library Ws2_32.lib.
+.PP
+Visual C++ Example: 
+.PP
+.nf
+cl -Fe myapp myapp.obj fieldtalk/lib/win/win32/release/libmbusmaster.lib Ws2_32.lib
+
+.fi
+.PP
+ 

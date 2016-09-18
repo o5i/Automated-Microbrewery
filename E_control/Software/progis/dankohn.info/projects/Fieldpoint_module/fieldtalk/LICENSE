@@ -1,0 +1,161 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+FOCUS Software Engineering Pty Ltd, Brisbane/Australia, ACN 104 080 935
+Library License
+Version 3, May 2003
+Copyright (c) 2002-2003 FOCUS Software Engineering Pty Ltd. All rights reserved.
+________________________________________________________________________________
+
+Definitions:
+
+   "Package" refers to the collection of files and any part hereof,
+   including, but not limited to, source code, programs, binary
+   executables, object files, libraries, images, and scripts, which
+   are distributed by FOCUS Software Engineering.
+
+   "Copyright Holder" is whoever is named in the copyright or
+   copyrights for the Package.
+
+   "You" is you, if you are thinking about using, copying or
+   distributing this Package or parts of it.
+
+   "Distributable Components" are dynamic libraries, shared libraries,
+   class files and similar components supplied by FOCUS Software
+   Engineering for redistribution. They must be listed in a "readme"
+   or "deploy" file included with the Package.
+
+   "Application" pertains to Your product be it an application,
+   applet or embedded software product.
+
+
+1.  In consideration of payment of the licence fee and your agreement
+    to abide by the terms and conditions of this licence, FOCUS
+    Software Engineering grants You the following non-exclusive
+    rights:
+
+    a) You may use the Package on one or more computers by a
+       single person who uses the software personally;
+    b) You may use the Package nonsimultaneously by multiple people if
+       it is installed on a single computer;
+    c) You may use the Package on a network, provided that the network
+       is operated by the organisation who purchased the license and
+       there is no concurrent use of the Package;
+    d) You may copy the Package for archival purposes.
+
+2.  You may reproduce and distribute, in executable form only,
+    Applications linked with static libraries supplied as part of the
+    Package and Applications incorporating dynamic libraries, shared
+    libraries and similar components supplied as Distributable
+    Components without royalties provided that:
+
+    a) You paid the license fee;
+    b) the purpose of distribution is to execute the Application;
+    c) the Distributable Components are not distributed or resold apart
+       from the Application;
+    d) it includes all of the original Copyright Notices and associated
+       Disclaimers;
+    e) it does not include any Package source code or part thereof.
+
+3.  If You have received this Package for the purpose of evaluation,
+    FOCUS Software Engineering grants You a non-exclusive license to
+    use the Package free of charge for the purpose of evaluating
+    whether to purchase an ongoing license to use the Package.  The
+    evaluation period is limited to 30 days and does not include the
+    right to reproduce and distribute Applications using the
+    Package. At the end of the evaluation period, if You do not
+    purchase a license, You must uninstall the Package from the
+    computers or devices You installed it on.
+
+4.  You are not required to accept this License, since You have not
+    signed it.  However, nothing else grants You permission to use or
+    distribute the Package or its derivative works.  These actions are
+    prohibited by law if You do not accept this License.  Therefore,
+    by using or distributing the Package (or any work based on the
+    Package), You indicate your acceptance of this License to do so,
+    and all its terms and conditions for copying, distributing or
+    using the Package or works based on it.
+
+5.  You may not use the Package to develop products which can be used
+    as a replacement or a directly competing product of this Package.
+
+6.  Where source code is provided as part of the Package, You may
+    modify the source code for the purpose of improvements and defect
+    fixes. If any modifications are made to any the source code, You
+    will put an additional banner into the code which indicates that
+    modifications were made by You.
+
+7.  You may not disclose the Package's software design, source code
+    and documentation or any part thereof to any third party without
+    the expressed written consent from FOCUS Software Engineering.
+
+8.  This License does not grant You any title, ownership rights,
+    rights to patents, copyrights, trade secrets, trademarks, or any
+    other rights in respect to the Package.
+
+9.  You may not use, copy, modify, sublicense, or distribute the
+    Package except as expressly provided under this License.  Any
+    attempt otherwise to use, copy, modify, sublicense or distribute
+    the Package is void, and will automatically terminate your rights
+    under this License.
+
+10. The License is not transferable without written permission from
+    FOCUS Software Engineering.
+
+11. FOCUS Software Engineering may create, from time to time, updated
+    versions of the Package. Updated versions of the Package will be
+    subject to the terms and conditions of this agreement and
+    reference to the Package in this agreement means and includes any
+    version update.
+
+12. THERE IS NO WARRANTY FOR THE PACKAGE, TO THE EXTENT PERMITTED BY
+    APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING FOCUS
+    SOFTWARE ENGINEERING, THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
+    PROVIDE THE PACKAGE "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+    EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+    PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE
+    PACKAGE IS WITH YOU.  SHOULD THE PACKAGE PROVE DEFECTIVE, YOU
+    ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+
+13. ANY LIABILITY OF FOCUS SOFTWARE ENGINEERING WILL BE LIMITED
+    EXCLUSIVELY TO REFUND OF PURCHASE PRICE. IN ADDITION, IN NO EVENT
+    UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL
+    FOCUS SOFTWARE ENGINEERING OR ITS PRINCIPALS, SHAREHOLDERS,
+    OFFICERS, EMPLOYEES, AFFILIATES, CONTRACTORS, SUBSIDIARIES, PARENT
+    ORGANIZATIONS AND ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY
+    MODIFY AND/OR REDISTRIBUTE THE PACKAGE AS PERMITTED ABOVE, BE
+    LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL,
+    INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR
+    INABILITY TO USE THE PACKAGE (INCLUDING BUT NOT LIMITED TO LOSS OF
+    DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU
+    OR THIRD PARTIES OR A FAILURE OF THE PACKAGE TO OPERATE WITH ANY
+    OTHER PACKAGES), EVEN IF SUCH PARTY HAS BEEN ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGES.
+
+14. IN ADDITION, IN NO EVENT DOES FOCUS SOFTWARE ENGINEERING AUTHORIZE
+    YOU TO USE THIS PACKAGE IN APPLICATIONS OR SYSTEMS WHERE IT'S
+    FAILURE TO PERFORM CAN REASONABLY BE EXPECTED TO RESULT IN A
+    SIGNIFICANT PHYSICAL INJURY, OR IN LOSS OF LIFE.  ANY SUCH USE BY
+    YOU IS ENTIRELY AT YOUR OWN RISK, AND YOU AGREE TO HOLD FOCUS
+    SOFTWARE ENGINEERING HARMLESS FROM ANY CLAIMS OR LOSSES RELATING
+    TO SUCH UNAUTHORIZED USE.
+
+15. This agreement constitutes the entire agreement between FOCUS
+    Software Engineering and You in relation to your use of the
+    SOFTWARE.  Any change will be effective only if in writing signed
+    by FOCUS Software Engineering and you.
+
+16. This License is governed by the laws of Queensland,
+    Australia, excluding choice of law rules. If any part of this
+    License is found to be in conflict with the law, that part shall
+    be interpreted in its broadest meaning consistent with the law,
+    and no other parts of the License shall be affected.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.2.1 (MingW32)
+
+iD8DBQE+yb3kCO2PJievT8IRAla5AKDQforpJqjriti20XFTYe5REbV7dgCfSEV2
+u0c3NnXlrOMkayn4txSMgv4=
+=WAla
+-----END PGP SIGNATURE-----

@@ -1,0 +1,126 @@
+.TH "MbusSlaveServer" 3 "20 Oct 2006" "Modbus Slave C++ Library" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MbusSlaveServer \- 
+.SH SYNOPSIS
+.br
+.PP
+Inherited by \fBMbusSerialSlaveProtocol\fP, and \fBMbusTcpSlaveProtocol\fP.
+.PP
+.SH "Detailed Description"
+.PP 
+Base class which implements the Modbus(R) server engine. 
+
+This class realises the server engine. The server engines processes Modbus messages, parses the function codes and upon receipt of a valid master query it calls Data Provider methods to exchange data with the user application. For a more detailed description which Modbus data and control functions have been implemented in the server engine see section \fBServer Functions common to all Protocol Flavours\fP.
+.PP
+\fBSee also:\fP
+.RS 4
+MbusSlaveServer 
+.PP
+\fBServer Functions common to all Protocol Flavours\fP 
+.RE
+.PP
+
+.PP
+.SS "Server Management Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBaddDataTable\fP (int slaveAddr, \fBMbusDataTableInterface\fP *dataTablePtr)"
+.br
+.RI "\fIAssociates a protocol object with a Data Provider and a slave address. \fP"
+.ti -1c
+.RI "virtual int \fBserverLoop\fP ()=0"
+.br
+.RI "\fIModbus slave server loop. \fP"
+.ti -1c
+.RI "virtual void \fBshutdownServer\fP ()"
+.br
+.RI "\fIShuts down the Modbus Server. \fP"
+.ti -1c
+.RI "virtual int \fBisStarted\fP ()=0"
+.br
+.RI "\fIReturns if server has been started up. \fP"
+.ti -1c
+.RI "virtual int \fBgetConnectionStatus\fP ()=0"
+.br
+.RI "\fIAssociates a protocol object with a Data Provider and a slave address. \fP"
+.in -1c
+.SS "Protocol Configuration"
+
+.in +1c
+.ti -1c
+.RI "long \fBsetTimeout\fP (long timeOut)"
+.br
+.RI "\fIConfigures master transmit time-out supervision. \fP"
+.ti -1c
+.RI "long \fBgetTimeout\fP ()"
+.br
+.RI "\fIReturns the master time-out supervision value. \fP"
+.in -1c
+.SS "Transmission Statistic Functions"
+
+.in +1c
+.ti -1c
+.RI "unsigned long \fBgetTotalCounter\fP ()"
+.br
+.RI "\fIReturns how often a message transfer has been executed. \fP"
+.ti -1c
+.RI "void \fBresetTotalCounter\fP ()"
+.br
+.RI "\fIResets total message transfer counter. \fP"
+.ti -1c
+.RI "unsigned long \fBgetSuccessCounter\fP ()"
+.br
+.RI "\fIReturns how often a message transfer was successful. \fP"
+.ti -1c
+.RI "void \fBresetSuccessCounter\fP ()"
+.br
+.RI "\fIResets successful message transfer counter. \fP"
+.in -1c
+.SS "Utility Functions"
+
+.in +1c
+.ti -1c
+.RI "static char * \fBgetPackageVersion\fP ()"
+.br
+.RI "\fIReturns the package version number. \fP"
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~MbusSlaveServer\fP ()"
+.br
+.RI "\fIDestructor. \fP"
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMbusSlaveServer\fP (\fBMbusDataTableInterface\fP *dataTablePtr=NULL)"
+.br
+.RI "\fIConstructs a MbusSlaveServer object and associates it with a Data Provider. \fP"
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "\fBMbusSlaveServer\fP (\fBMbusDataTableInterface\fP * dataTablePtr = \fCNULL\fP)\fC [protected]\fP"
+.PP
+Constructs a MbusSlaveServer object and associates it with a Data Provider. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdataTablePtr\fP Modbus data table pointer. Must point to a Data Provider object derived from the \fBMbusDataTableInterface\fP class. The Data Provider is the interface between your application data and the Modbus network. 
+.RE
+.PP
+
+.SS "~\fBMbusSlaveServer\fP ()\fC [virtual]\fP"
+.PP
+Destructor. 
+.PP
+Shuts down server and releases any resources. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Modbus Slave C++ Library from the source code.

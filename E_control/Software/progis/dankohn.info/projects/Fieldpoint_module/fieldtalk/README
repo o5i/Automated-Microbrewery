@@ -1,0 +1,35 @@
+FieldTalk(tm) Modbus Slave EVALUATION VERSION - Read Me Notes
+_____________________________________________________________
+$Date: 2006/10/20 11:41:23 $
+
+
+This Read Me file contains last-minute product information
+for the FieldTalk Modbus Slave C++ Library Editions - Evaluation Version.
+
+This package is provided for the purpose of evaluating
+whether to purchase an ongoing license to use the Package. 
+
+
+Files part of the Package
+__________________________
+
+README                    : Read Me Notes
+LICENSE                   : Library License containing the Terms & Conditions of use
+RELEASE                   : Version number and build date of the release
+samples/*                 : Directory with examples
+
+doc/libmbusslave/html/index.html : Documentation in HTML format
+doc/libmbusslave/man           : Documentation as man pages
+doc/libmbusslave.pdf           : Documentation in PDF format
+doc/libmbusslave.chm           : Documentation in Microsoft Help format
+
+
+Distributable Components
+________________________
+
+This is an Evaluation Version and does not contain any redistributable
+components. You must not redistribute any source, object or library files.
+
+________________________________________________________________________________
+Copyright (c) 2002-2006 FOCUS Software Engineering Pty Ltd. All rights reserved.
+

@@ -1,0 +1,27 @@
+.TH "Serial Protocols" 3 "20 Oct 2006" "Modbus Slave C++ Library" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Serial Protocols \- 
+.SH "Detailed Description"
+.PP 
+The Server Engines of the two serial protocol flavours are implemented in the classes \fBMbusRtuSlaveProtocol\fP and \fBMbusAsciiSlaveProtocol\fP. 
+.PP
+These classes provide functions to start-up and to execute the server engine which includes opening and closing of the serial port. Upon receipt of a valid master query the server engine calls Data Provider methods to exchange data with the user application. For a more detailed description which Modbus data and control functions have been implemented in the server engine see section \fBServer Functions common to all Protocol Flavours\fP.
+.PP
+See sections \fBThe RTU Protocol\fP and \fBThe ASCII Protocol\fP for some background information about the two serial Modbus protocols.
+.PP
+See section \fBUsing Serial Protocols\fP for an example how to use the \fBMbusRtuSlaveProtocol\fP and \fBMbusAsciiSlaveProtocol\fP class. 
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBMbusRtuSlaveProtocol\fP"
+.br
+.RI "\fIModbus RTU Slave Protocol class. \fP"
+.ti -1c
+.RI "class \fBMbusAsciiSlaveProtocol\fP"
+.br
+.RI "\fIModbus ASCII Slave Protocol class. \fP"
+.in -1c

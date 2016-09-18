@@ -1,0 +1,21 @@
+ dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait logo.nologo consoleblank=0 loglevel=1
+
+core_freq=250
+enable_uart=1
+# dtoverlay=pi3-miniuart-bt
+# dtoverlay=pi3-disable-bt
+dtoverlay=pi3-disable-bt-overlay
+force_turbo=1
+
+
+systemctl disable hciuart.service  
+systemctl disable bluetooth.service  
+
+
+
+
+
+
+http://wiki.dragino.com/index.php?title=Getting_GPS_to_work_on_Raspberry_Pi_3_Model_B
+
+screen /dev/serial/by-id/usb-Teensyduino_USB_Serial_641710-if00 115200

@@ -1,0 +1,11 @@
+[Unit]
+Description=SCRIPT TO RUN AFTER BOOTING
+After=syslog.target
+After=rc-local.service
+After=systemd-user-sessions.service plymouth-quit-wait.service
+[Service]
+ExecStart=/usr/bin/xinit /etc/beermachine/startbrowser.sh
+Type=idle
+Restart=always
+[Install]
+WantedBy=multi-user.target

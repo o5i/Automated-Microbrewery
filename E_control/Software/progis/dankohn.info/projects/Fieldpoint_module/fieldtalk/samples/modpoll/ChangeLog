@@ -1,0 +1,25 @@
+2003-02-01 Henrik W Maier  <henrik@focus-sw.com>
+	
+	* modpoll.cpp: -4 parameter added for RS485 mode.
+
+2002-11-05 Henrik W Maier  <henrik@focus-sw.com>
+	
+	* modpoll.cpp: -p parameter added for TCP protocol, default parity
+	is now none, new "modulo 10000" long integer data types added
+
+2002-10-30  Henrik W Maier  <henrik@focus-sw.com>
+	
+	* modpoll.cpp: Terminates in case of a closed TCP/IP connection.
+	Some error messages changed. Changed command line options for
+	holding and input registers. -t4 is now holding register, -t3 input
+	register.
+
+2002-07-15  Henrik W Maier  <henrik@focus-sw.com>
+	
+	* modpoll.cpp: Added string.h dependency for Linux 7.2 glib,
+	reference index print-out for 32-bit values corrected. Released as
+	v1.1.
+
+2002-03-03  Henrik W Maier  <henrik@focus-sw.com>
+	
+	* modpoll.cpp: First release as v1.0

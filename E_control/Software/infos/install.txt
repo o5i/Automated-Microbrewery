@@ -1,0 +1,13 @@
+apt-get install --no-install-recommends xinit unclutter x11-xserver-utils xserver-xorg xserver-xorg-video-fbdev
+
+nano /etc/systemd/system/bluetooth.target.wants/bluetooth.service
+
+ExecStart=/usr/lib/bluetooth/bluetoothd
+ExecStart=/usr/lib/bluetooth/bluetoothd --noplugin=sap
+
+systemctl daemon-reload
+service bluetooth restart
+service bluetooth status
+
+
+http://blog.fraggod.net/2015/11/28/raspberry-pi-early-boot-splash-logo-screen.html

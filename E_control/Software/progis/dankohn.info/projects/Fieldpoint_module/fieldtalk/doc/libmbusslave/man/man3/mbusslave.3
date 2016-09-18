@@ -1,0 +1,240 @@
+.TH "Server Functions common to all Protocol Flavours" 3 "20 Oct 2006" "Modbus Slave C++ Library" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Server Functions common to all Protocol Flavours \- 
+.SH "Detailed Description"
+.PP 
+The \fIFieldTalk\fP Modbus Slave Protocol Library's server engine implements the most commonly used Modbus data functions as well as some control functions. The functions to perform PLC program download and other device specific functions are outside the scope of this library. 
+.PP
+All Bit Access and 16 Bits Access Modbus Function Codes have been implemented. In addition the most frequently used Diagnostics Function Codes have been implemented.
+.PP
+The following table lists the functions supported by the slave:
+.PP
+\fBModbus Function Code\fP\fBCurrent Terminology\fP \fBClassic Terminology\fP
+.PP
+\fB16-bit Access\fP 3Read Multiple Registers Read Holding Registers 4Read Input Registers Read Input Registers 6Write Single Register Preset Single Register 16 (10 Hex)Write Multiple Registers Preset Multiple Registers 22 (16 Hex)Mask Write Register Mask Write Register 23 (17 Hex)Read/Write Registers Read/Write Registers
+.PP
+\fBBit access\fP 1Read CoilsRead Coil Status 2Read Inputs Discretes Read Input Status 5Write CoilForce Single Coil 15 (0F Hex)Force Multiple Coils Force Multiple Coils
+.PP
+\fBDiagnostics\fP 7Read Exception Status Read Exception Status 8 sub code 00Diagnostics - Return Query Data Diagnostics - Return Query Data 
+.PP
+.SS "Server Management Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBMbusSlaveServer::addDataTable\fP (int slaveAddr, \fBMbusDataTableInterface\fP *dataTablePtr)"
+.br
+.RI "\fIAssociates a protocol object with a Data Provider and a slave address. \fP"
+.ti -1c
+.RI "virtual int \fBMbusSlaveServer::serverLoop\fP ()=0"
+.br
+.RI "\fIModbus slave server loop. \fP"
+.ti -1c
+.RI "virtual void \fBMbusSlaveServer::shutdownServer\fP ()"
+.br
+.RI "\fIShuts down the Modbus Server. \fP"
+.ti -1c
+.RI "virtual int \fBMbusSlaveServer::isStarted\fP ()=0"
+.br
+.RI "\fIReturns if server has been started up. \fP"
+.ti -1c
+.RI "virtual int \fBMbusSlaveServer::getConnectionStatus\fP ()=0"
+.br
+.RI "\fIAssociates a protocol object with a Data Provider and a slave address. \fP"
+.in -1c
+.SS "Protocol Configuration"
+
+.in +1c
+.ti -1c
+.RI "long \fBMbusSlaveServer::setTimeout\fP (long timeOut)"
+.br
+.RI "\fIConfigures master transmit time-out supervision. \fP"
+.ti -1c
+.RI "long \fBMbusSlaveServer::getTimeout\fP ()"
+.br
+.RI "\fIReturns the master time-out supervision value. \fP"
+.in -1c
+.SS "Transmission Statistic Functions"
+
+.in +1c
+.ti -1c
+.RI "unsigned long \fBMbusSlaveServer::getTotalCounter\fP ()"
+.br
+.RI "\fIReturns how often a message transfer has been executed. \fP"
+.ti -1c
+.RI "void \fBMbusSlaveServer::resetTotalCounter\fP ()"
+.br
+.RI "\fIResets total message transfer counter. \fP"
+.ti -1c
+.RI "unsigned long \fBMbusSlaveServer::getSuccessCounter\fP ()"
+.br
+.RI "\fIReturns how often a message transfer was successful. \fP"
+.ti -1c
+.RI "void \fBMbusSlaveServer::resetSuccessCounter\fP ()"
+.br
+.RI "\fIResets successful message transfer counter. \fP"
+.in -1c
+.SS "Utility Functions"
+
+.in +1c
+.ti -1c
+.RI "static char * \fBMbusSlaveServer::getPackageVersion\fP ()"
+.br
+.RI "\fIReturns the package version number. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int addDataTable (int slaveAddr, \fBMbusDataTableInterface\fP * dataTablePtr)\fC [inherited]\fP"
+.PP
+Associates a protocol object with a Data Provider and a slave address. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdataTablePtr\fP Modbus data table pointer. Must point to a Data Provider object derived from the \fBMbusDataTableInterface\fP class. The Data Provider is the interface between your application data and the Modbus network. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+FTALK_SUCCESS on success or error code. See \fBProtocol Errors and Exceptions\fP for a list of error codes. 
+.RE
+.PP
+
+.SS "long setTimeout (long timeOut)\fC [inherited]\fP"
+.PP
+Configures master transmit time-out supervision. 
+.PP
+The slave can monitor whether a master is actually transmitting characters or not. This function sets the transmit time-out to the specified value. A value of 0 disables the time-out, which stops time-out notifications being sent to the Data Provider.
+.PP
+\fBRemarks:\fP
+.RS 4
+The time-out value is indicative only and not guaranteed to be maintained. How precise it is followed depends on the operating system used, it's scheduling priority and it's system timer resolution. 
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+The time-out does not check if a master is sending valid frames. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fItimeOut\fP Timeout value in ms (Range: 0 - 100000), 0 disables time-out 
+.RE
+.PP
+\fBReturn values:\fP
+.RS 4
+\fIFTALK_SUCCESS\fP Success 
+.br
+\fIFTALK_ILLEGAL_ARGUMENT_ERROR\fP Argument out of range 
+.RE
+.PP
+
+.SS "unsigned long getTotalCounter ()\fC [inherited]\fP"
+.PP
+Returns how often a message transfer has been executed. 
+.PP
+\fBReturns:\fP
+.RS 4
+Counter value 
+.RE
+.PP
+
+.SS "char * getPackageVersion ()\fC [static, inherited]\fP"
+.PP
+Returns the package version number. 
+.PP
+\fBReturns:\fP
+.RS 4
+Package version string 
+.RE
+.PP
+
+.SS "long getTimeout ()\fC [inherited]\fP"
+.PP
+Returns the master time-out supervision value. 
+.PP
+\fBRemarks:\fP
+.RS 4
+The time-out value is indicative only and not guaranteed to be maintained. How precise it is followed depends on the operating system used, it's scheduling priority and it's system timer resolution. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Timeout value in ms 
+.RE
+.PP
+
+.SS "unsigned long getSuccessCounter ()\fC [inherited]\fP"
+.PP
+Returns how often a message transfer was successful. 
+.PP
+\fBReturns:\fP
+.RS 4
+Counter value 
+.RE
+.PP
+
+.SS "virtual int serverLoop ()\fC [pure virtual, inherited]\fP"
+.PP
+Modbus slave server loop. 
+.PP
+This server loop must be called continuously. It must not be blocked. The server has to be started before calling the \fBserverLoop()\fP method.
+.PP
+In most cases the server loop is executed in an endless loop: 
+.PP
+.nf
+ while (1)
+ {
+   mbusProtocol.serverLoop();
+   doOtherStuff();
+ }
+
+.fi
+.PP
+.PP
+\fBReturns:\fP
+.RS 4
+FTALK_SUCCESS on success or error code. See \fBProtocol Errors and Exceptions\fP for a list of error codes. 
+.RE
+.PP
+
+.PP
+Implemented in \fBMbusRtuSlaveProtocol\fP, \fBMbusAsciiSlaveProtocol\fP, and \fBMbusTcpSlaveProtocol\fP.
+.SS "void shutdownServer ()\fC [virtual, inherited]\fP"
+.PP
+Shuts down the Modbus Server. 
+.PP
+This function also closes any associated serial ports or sockets. 
+.PP
+Reimplemented in \fBMbusSerialSlaveProtocol\fP, and \fBMbusTcpSlaveProtocol\fP.
+.SS "virtual int isStarted ()\fC [pure virtual, inherited]\fP"
+.PP
+Returns if server has been started up. 
+.PP
+\fBReturn values:\fP
+.RS 4
+\fItrue\fP = started 
+.br
+\fIfalse\fP = shutdown 
+.RE
+.PP
+
+.PP
+Implemented in \fBMbusSerialSlaveProtocol\fP, and \fBMbusTcpSlaveProtocol\fP.
+.SS "virtual int getConnectionStatus ()\fC [pure virtual, inherited]\fP"
+.PP
+Associates a protocol object with a Data Provider and a slave address. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdataTablePtr\fP Modbus data table pointer. Must point to a Data Provider object derived from the \fBMbusDataTableInterface\fP class. The Data Provider is the interface between your application data and the Modbus network. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+FTALK_SUCCESS on success or error code. See \fBProtocol Errors and Exceptions\fP for a list of error codes. 
+.RE
+.PP
+
+.PP
+Implemented in \fBMbusSerialSlaveProtocol\fP, and \fBMbusTcpSlaveProtocol\fP.

@@ -1,0 +1,8 @@
+R:0:w:S1:Switch 1
+R:1:w:S2:Switch 2
+R:2:w:S3:Switch 3
+R:3:w:S4:Switch 4
+R:4:w:VD1:Gas Valve 1 (ONOFF)
+R:5:w:VD2:Gas Valve 2 (ONOFF)
+R:6:w:VA1:Gas Valve 1 (Power)
+R:7:w:VA2:Gas Valve 2 (Power)

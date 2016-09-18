@@ -1,0 +1,36 @@
+.TH "MODBUS/TCP Protocol" 3 "20 Oct 2006" "Modbus Slave C++ Library" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MODBUS/TCP Protocol \- 
+.SH "Detailed Description"
+.PP 
+The Server Engine of the MODBUS/TCP slave protocol is implemented in the class \fBMbusTcpSlaveProtocol\fP. 
+.PP
+It provides functions to start-up and to execute the server engine. This server engine can handle multiple master connections and is implemented as a single threaded TCP server. Upon receipt of a valid master query the server engine calls Data Provider methods to exchange data with the user application. For a more detailed description which Modbus data and control functions have been implemented in the server engine see section \fBServer Functions common to all Protocol Flavours\fP.
+.PP
+\fBNote:\fP
+.RS 4
+If the configured TCP port is below IPPORT_RESERVED (usually 1024), the process has to run with root privilege! This applies if you are using the default MODBUS/TCP port 502.
+.RE
+.PP
+See section \fBThe MODBUS/TCP Protocol\fP for some background information about MODBUS/TCP.
+.PP
+See section \fBUsing MODBUS/TCP Protocol\fP for an example how to use the \fBMbusTcpSlaveProtocol\fP class. 
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBMbusTcpSlaveProtocol\fP"
+.br
+.RI "\fIMODBUS/TCP Slave Protocol class. \fP"
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMAX_CONNECTIONS\fP   16"
+.br
+.RI "\fIMaximum concurrent TCP/IP connections handled by server engine. \fP"
+.in -1c
