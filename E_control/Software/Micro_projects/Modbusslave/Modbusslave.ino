@@ -5,7 +5,7 @@
 
 #define PWM_1 22
 #define PWM_2 23
-#define BUZZER 9
+#define BUZZER 3
 #define DO_1 5
 #define DO_2 6
 #define DO_3 7
@@ -45,8 +45,8 @@ void setup()
   digitalWrite(DO_6, HIGH);
   digitalWrite(DO_7, HIGH);
   digitalWrite(DO_8, HIGH);
-  analogWriteFrequency(22, 5859.375 );
-  analogWriteFrequency(23, 5859.375 );
+  analogWriteFrequency(22, 1000 );
+  analogWriteFrequency(23, 1000 );
   analogWriteResolution(12);
   DS18B20.begin();
   DS18B20.getAddress(DS18B20_0, 0);
