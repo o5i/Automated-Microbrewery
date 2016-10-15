@@ -16,11 +16,16 @@
 #define DO_8 21
 #define BUS_PIN 10
 #define TEMPERATURE_PRECISION 11
+#define ANALOG_RESOLUTION 16
+#define ANALOG_FREQ 366.2109    // @24Mhz
+//#define ANALOG_FREQ 549.3164    // @72Mhz
+//#define ANALOG_FREQ 732.4218    // @48-96Mhz
+
 
 OneWire ONEWIRE_BUS(BUS_PIN);
 DallasTemperature DS18B20(&ONEWIRE_BUS);
 DeviceAddress DS18B20_0, DS18B20_1, DS18B20_2;
-unsigned int REG[50];
+unsigned int REG[100];
 
 void setup()
 {
@@ -45,9 +50,9 @@ void setup()
   digitalWrite(DO_6, HIGH);
   digitalWrite(DO_7, HIGH);
   digitalWrite(DO_8, HIGH);
-  analogWriteFrequency(22, 1000 );
-  analogWriteFrequency(23, 1000 );
-  analogWriteResolution(12);
+  analogWriteFrequency(PWM_1, ANALOG_FREQ );
+  analogWriteFrequency(PWM_2, ANALOG_FREQ );
+  analogWriteResolution(ANALOG_RESOLUTION);
   DS18B20.begin();
   DS18B20.getAddress(DS18B20_0, 0);
   DS18B20.getAddress(DS18B20_1, 1);
@@ -61,8 +66,10 @@ void setup()
 void loop()
 {
   modbus_update();
-  analogWrite(PWM_1, REG[1] >> 4);
-  analogWrite(PWM_2, REG[2] >> 4);
+  analogWrite(PWM_1, REG[1]);
+  analogWrite(PWM_2, REG[2]);
+  //analogWrite(PWM_1, REG[1] >> 4);  // Use if change resolution
+  //analogWrite(PWM_2, REG[2] >> 4);  // Use if change resolution
   digitalWrite(DO_1, !REG[10]);
   digitalWrite(DO_2, !REG[11]);
   digitalWrite(DO_3, !REG[12]);
@@ -74,8 +81,11 @@ void loop()
   DS18B20.setWaitForConversion(false);
   DS18B20.requestTemperatures();
   REG[40] = DS18B20.getDeviceCount();
-  REG[41] = DS18B20.getTempC(DS18B20_0)*100;
-  REG[42] = DS18B20.getTempC(DS18B20_1)*100;
-  REG[43] = DS18B20.getTempC(DS18B20_2)*100;
+  REG[41] = DS18B20.getTempC(DS18B20_0) * 100;
+  REG[42] = DS18B20.getTempC(DS18B20_1) * 100;
+  REG[43] = DS18B20.getTempC(DS18B20_2) * 100;
+  if (REG[50]) {
+    tone(BUZZER, REG[51], REG[52]);
+  }
 }
 
