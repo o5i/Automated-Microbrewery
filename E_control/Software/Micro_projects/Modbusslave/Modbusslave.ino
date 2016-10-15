@@ -17,8 +17,8 @@
 #define BUS_PIN 10
 #define TEMPERATURE_PRECISION 11
 #define ANALOG_RESOLUTION 16
-#define ANALOG_FREQ 366.2109    // @24Mhz
-//#define ANALOG_FREQ 549.3164    // @72Mhz
+//#define ANALOG_FREQ 366.2109    // @24Mhz
+#define ANALOG_FREQ 549.3164    // @72Mhz
 //#define ANALOG_FREQ 732.4218    // @48-96Mhz
 
 
@@ -66,10 +66,15 @@ void setup()
 void loop()
 {
   modbus_update();
-  analogWrite(PWM_1, REG[1]);
-  analogWrite(PWM_2, REG[2]);
-  //analogWrite(PWM_1, REG[1] >> 4);  // Use if change resolution
-  //analogWrite(PWM_2, REG[2] >> 4);  // Use if change resolution
+  if (REG[62]) {
+    analogWriteFrequency(PWM_1, map(REG[1], 0, 65535, 100, 500));
+  } else {
+    analogWriteFrequency(PWM_1, ANALOG_FREQ );
+  }
+  analogWrite(PWM_1, map(REG[1], 0, 65535, REG[60], 65535));
+  analogWrite(PWM_2, map(REG[2], 0, 65535, REG[61], 65535));
+  //analogWrite(PWM_1, REG[1] >> 4);  // Use if change resolution "Bitshift"
+  //analogWrite(PWM_2, REG[2] >> 4);  // Use if change resolution "Bitshift"
   digitalWrite(DO_1, !REG[10]);
   digitalWrite(DO_2, !REG[11]);
   digitalWrite(DO_3, !REG[12]);
