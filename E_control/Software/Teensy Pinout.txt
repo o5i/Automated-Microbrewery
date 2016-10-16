@@ -1,0 +1,12 @@
+23 pwm
+22 pwm
+21 dig relay
+20 dig relay
+19 dig relay
+18 dig relay
+10 onewire
+8 dig relay
+7 dig relay
+6 dig relay
+5 dig relay
+3 Buzzer
