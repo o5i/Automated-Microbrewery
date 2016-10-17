@@ -4,7 +4,6 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include <PID_v1.h> //http://playground.arduino.cc/Code/PIDLibrary
-#include <Bounce.h>
 
 #define PWM_1 22
 #define PWM_2 23
@@ -44,7 +43,7 @@ void setup()
   memset(REG, 0, sizeof(REG));
   REG[60] = 0;
   REG[61] = 65535;
-  REG[64] = 2900;
+  REG[64] = 2000;
   REG[65] = 300;
   REG[66] = 5;
   REG[67] = 0;
@@ -147,7 +146,7 @@ void loop()
       }
       // digitalWrite(PWM_1, STATE);
     } else {
-      analogWrite(PWM_1, (map(REG[1], 0, 65535, REG[60], REG[61])) >> 2); // Use if change resolution "Bitshift"
+      analogWrite(PWM_1, REG[1] >> 2); // Use if change resolution "Bitshift"
     }
   } else {
     analogWrite(PWM_1, 0);
@@ -162,7 +161,7 @@ void loop()
       }
       // digitalWrite(PWM_2, STATE);
     } else {
-      analogWrite(PWM_2, (map(REG[2], 0, 65535, REG[60], REG[61])) >> 2); // Use if change resolution "Bitshift"
+      analogWrite(PWM_2, REG[2] >> 2); // Use if change resolution "Bitshift"
     }
   } else {
     analogWrite(PWM_2, 0);
