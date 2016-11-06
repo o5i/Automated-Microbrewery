@@ -33,3 +33,21 @@ sudo dpkg -i chromium-browser_45.0.2454.101-0ubuntu0.14.04.1.1099_armhf.deb
 @xset -dpms
 @chromium-browser --noerrdialogs --kiosk --incognito https://news.google.com
 
+
+
+
+@xscreensaver –no-splash
+
+
+@xset s off
+
+@xset s noblank
+
+@xset –dpms
+
+
+
+
+ xinit /usr/bin/chromium-browser --noerrdialogs --kiosk --incognito --no-sandbox --user-data-dir http://localhost:5000 
+
+

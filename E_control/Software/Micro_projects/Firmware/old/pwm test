@@ -38,6 +38,8 @@ void setup()
   modbus_configure(&Serial1, 19200, SERIAL_8N1, 1, 2, sizeof(REG), REG);
   modbus_update_comms(19200, SERIAL_8N1, 1);
   modbus_update();
+  REG[18] = 0;
+  REG[19] = 0;
   REG[60] = 40000;
   REG[61] = 60000;
   REG[64] = 700;
@@ -89,23 +91,35 @@ void loop()
   PID2.Compute();
 
   if (REG[80]) {
-    if (PID_OUT_1 >= 30000) {
-      REG[10]=1;
-    }
-    if (PID_OUT_1 <= 0) {
+    if (REG[18]) {
+      if (PID_OUT_1 >= 30000) {
+        REG[10]=1;
+      }
+      if (PID_OUT_1 <= 0) {
+        REG[10]=0;
+        REG[1]=0;
+      }
+      if (REG[10]){
+        REG[1] = PID_OUT_1;
+      }
+    } else {
       REG[10]=0;
+      REG[1]=0;
     }
-    if (PID_OUT_2 >= 30000) {
-      REG[11]=1;
-    }
-    if (PID_OUT_2 <= 0) {
+    if (REG[19]) {
+      if (PID_OUT_2 >= 30000) {
+        REG[11]=1;
+      }
+      if (PID_OUT_2 <= 0) {
+        REG[11]=0;
+        REG[2]=0;
+      }
+      if (REG[11]){
+        REG[2] = PID_OUT_2;
+      }
+    } else {
       REG[11]=0;
-    }
-    if (REG[10]){
-      REG[1] = PID_OUT_1;
-    }
-    if (REG[11]){
-      REG[2] = PID_OUT_2;
+      REG[2]=0;
     }
   }
 
@@ -116,6 +130,7 @@ void loop()
   if (REG[64] < 200) {
     REG[64] = 200;
   }
+
   PID_IN_1 = REG[41];
   PID_IN_2 = REG[42];
   PID_SET_1 = REG[70];
