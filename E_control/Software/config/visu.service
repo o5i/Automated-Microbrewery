@@ -1,0 +1,9 @@
+[Unit]
+Description=visu
+After=syslog.target codesyscontrol.service
+[Service]
+ExecStart=/root/scripts/start_visu
+Type=idle
+Restart=always
+[Install]
+WantedBy=multi-user.target

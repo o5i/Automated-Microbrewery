@@ -1,0 +1,29 @@
+#!/bin/sh
+@xscreensaver –no-splash
+@xset s off
+@xset s noblank
+@xset –dpms
+/usr/bin/xinit \
+	/usr/bin/chromium-browser \
+		--noerrdialogs \
+		--kiosk \
+		--incognito \
+		--no-sandbox \
+		--user-data-dir=/tmp/chromium/userdata/ \
+		--disk-cache-size=10000000 \
+		--disk-cache-dir=/tmp/chromium/cache/ \
+		--disable-java \
+		--disable-plugins \
+		--no-first-run \
+		--window-size=800,480 \
+		--window-position=0,0 \
+		--force-device-scale-factor=1 \
+		http://localhost/webvisu.htm \
+	-- -nocursor \
+# --temp-profile \
+# --single-process \
+# --no-proxy-server \
+# --no-default-browser-check \
+# --disable-notifications \
+# --disable-sync \
+
