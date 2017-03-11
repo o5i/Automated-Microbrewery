@@ -1,0 +1,84 @@
+tauchhülse mit klemmverschraubung
+
+Futurashop
+3x Temparatursonde 2846-SONDADS18B20 http://www.futurashop.it/sonda-di-temperatura-waterproof-con-ds18b20-2846-sondads18b20
+1x Wippschalter 8220-R1944C/G
+http://www.futurashop.it/interruttore-con-luce-verde-al-neon-8220-r1944cg?search=INTERRUTTORE
+3x Buchse Temperatursonde 6520-CA104
+http://www.futurashop.it/connettore-xlr-3p-femmina-6520-ca104?search=XLR
+http://www.reichelt.de/XLR-Einbaubuchsen-stecker/XLR-3EB/3/index.html?&ACTION=3&LA=2&ARTICLE=22899&GROUPID=5188&artnr=XLR+3EB
+http://www.reichelt.de/XLR-Einbaubuchsen-stecker/NEUTRIK-DSS-BR/3/index.html?&ACTION=3&LA=2&ARTICLE=132008&GROUPID=5188&artnr=NEUTRIK+DSS+BR
+
+3x Stecker Temperatursonde 8220-CA093
+http://www.futurashop.it/connettore-maschio-3p-xlr-8220-ca093?search=XLR
+http://www.reichelt.de/XLR-3ST-N/3/index.html?&ACTION=3&LA=446&ARTICLE=40793&artnr=XLR+3ST-N&SEARCH=xlr
+1x Microusb Adapter 2846-PLUGTOUSB
+http://www.futurashop.it/plugtousb_microusb
+http://www.reichelt.de/Weiteres-Zubehoer/RPI-MICRO-USB-10/3/index.html?&ACTION=3&LA=2&ARTICLE=161478&GROUPID=6671&artnr=RPI+MICRO+USB+10
+
+2x SolidStateRelay ??? http://www.futurashop.it/rel%C3%A8-allo-stato-solido-40-a-3-32-vdc-6168-com13015
+http://www.reichelt.de/Solid-State-Relais/RA-2425-D06/3/index.html?&ACTION=3&LA=2&ARTICLE=22691&GROUPID=3298&artnr=RA+2425-D06
+
+Buchse Netz
+http://www.reichelt.de/Kaltgeraeteeinbaustecker/KES-1/3/index.html?&ACTION=3&LA=2&ARTICLE=9356&GROUPID=5204&artnr=KES+1
+
+
+motortreiber
+http://www.robotstore.it/product/150/Pololu-TB6612FNG-Dual-Motor-Driver-Carrier.html
+http://www.robotstore.it/product/503/DC-Dual-Motor-Driver-30V-4A-V2.html
+
+spannungsregler
+http://www.ebay.it/itm/0898-Regolatore-di-tensione-Step-Down-Buck-Regulator-D24V3F5-/351694415824?hash=item51e29ee7d0:g:1hgAAOxyakdREn2m
+
+1x Netzteil meanwell 5V 3A
+http://www.3lco.biz/product.php?id_product=4575
+http://www.3lco.biz/product.php?id_product=5377
+http://www.3lco.biz/product.php?id_product=7460
+http://www.reichelt.de/Schaltnetzteile-bis-150-W/SNT-RS-25-5/3/index.html?&ACTION=3&LA=2&ARTICLE=137084&GROUPID=7264&artnr=SNT+RS+25+5
+
+https://www.reichelt.de/Erweiterungsboards/RASP-SHD-PROTO/3/index.html?ACTION=3&GROUPID=6669&ARTICLE=163031
+
+
+schalter
+http://www.reichelt.de/WIPPE-1839-3502/3/index.html?&ACTION=3&LA=446&ARTICLE=154431&artnr=WIPPE+1839.3502&SEARCH=wippschalter
+
+
+2x Stecker Magnetventil
+2x Buchse Magnetventil
+2x Stecker Rührwerk/motor 
+http://thumbs2.ebaystatic.com/d/l225/m/mtaVeN_QaZU09iCsxInTt5g.jpg
+http://www.reichelt.de/Kaltgeraeteeinbaubuchsen/S-KE4B-Q/3/index.html?&ACTION=3&LA=2&ARTICLE=34736&GROUPID=5205&artnr=S+KE4B-Q
+
+1x Strombuchse http://www.hollandlink.nl/data/articles/images/big/b_49.jpg
+1x Sicherungshalter
+http://i.ebayimg.com/t/TECCRIS-Sicherungshalter-5-x-20mm-Glas-Fein-Sicherung-Halter-10A-250V-PKW-KFZ-/00/s/NDMyWDY1MA==/z/3asAAOSw~OdVa2-P/$_35.JPG
+
+Sonstiges
+3x Fitting Temperatursonde
+6x Schrauben M6x50 inox 
+6x Mutter Plastik M6
+1x Schlitzblech/Lochblech
+1x Schaltkasten
+1x Pumpe
+1x Motor Rührwerk
+1x Inverter Pumpe??
+
+
+
+Infos
+Software:
+http://craftbeerpi.com/
+http://www.sansalinux.org/mashberry/index.html
+http://www.easybrew.it/
+http://www.brewpi.com/
+http://www.dunkelbrauer.de/Software/
+codesys
+
+DIN 11852 Milchverschraubung
+http://www.bacbrewing.com/
+http://www.mtec-eckerlin.de/
+http://www.maremossoforzasette.it/
+http://www.polsinelli.it
+http://www.watterott.com
+http://www.robanautica.it/
+http://www.forniturebirra.com/
